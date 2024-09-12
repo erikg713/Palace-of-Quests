@@ -23,3 +23,10 @@ services:
     ports:
       - "5432:5432"
 
+
+### Running with Docker Compose
+
+1. Build and start the services:
+
+```bash
+docker-compose up --build
