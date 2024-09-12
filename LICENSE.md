@@ -19,10 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
-### Summary
-
-- **Frontend `package.json`**: Specifies dependencies and scripts for the React app.
-- **Frontend `src/App.js`**: Main app component for the Palace of Quests.
-- **Backend `requirements.txt`**: Lists backend dependencies, including Flask, SQLAlchemy, and the Pi Network SDK.
-- **`README.md`**: Provides a comprehensive guide for the app’s installation, usage, and features.
