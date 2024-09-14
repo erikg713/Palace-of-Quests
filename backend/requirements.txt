@@ -1,6 +1,6 @@
-Flask==2.0.1
+Flask==2.2.5
 Flask-SQLAlchemy==2.5.1
 psycopg2==2.9.1
 pi-sdk==1.0.0  # Placeholder for the actual Pi Network SDK
-gunicorn==20.1.0
+gunicorn==22.0.0
 
