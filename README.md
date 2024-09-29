@@ -1,6 +1,6 @@
-## Code-Quests
+## Code Quests- Adventure in Syntax Land 
 
-Code-Quests is a concept code based programming game called **"CodeQuest: Adventure in Syntax Land."**
+Code Quests- Adventure in Syntax Land is a concept code based programming game called **"CodeQuest: Adventure in Syntax Land."**
 
 ### Game Concept
 **Genre:** Adventure/Puzzle  
