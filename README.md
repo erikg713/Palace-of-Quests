@@ -1,4 +1,4 @@
-# Palace of Quests
+## Code-Quests
 
 Palace of Quests is a Web3 quest-type application built for the Pi Network community. The app integrates the Pi Network SDK for peer-to-peer payments and runs on the Pi Network blockchain. Users can complete quests and make transactions using Pi tokens, while ensuring high levels of security and scalability.
 
