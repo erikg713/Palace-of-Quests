@@ -56,6 +56,14 @@ Players embark on a whimsical journey through various themed worlds, each repres
 ### Conclusion
 "CodeQuest: Adventure in Syntax Land" combines the thrill of exploration and adventure with foundational programming skills, making learning code enjoyable and engaging for players of all ages. By integrating interactive puzzles and a rich narrative, it fosters a love for programming while building confidence in problem-solving skills. Is a Web3 quest-type application built for the Pi Network community. The app integrates the Pi Network SDK for peer-to-peer payments and runs on the Pi Network blockchain. Users can complete quests and make transactions using Pi tokens, while ensuring high levels of security and scalability.
 
+The game will be built as a web application using the following stack:
+
+Frontend: React.js for a dynamic user interface
+Backend: Flask (with Blueprints for modularity)
+Database: PostgreSQL for user progress, rewards, and levels
+Authentication: JWT (JSON Web Tokens) for secure login
+Security: Input validation, rate limiting, HTTPS headers, encryption, etc.
+
 ## Project Structure
 
 /codequest-adventure
