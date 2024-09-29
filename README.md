@@ -85,4 +85,4 @@ Players embark on a whimsical journey through various themed worlds, each repres
 
 ### Cloning the Repository
 
-https://github.com/erikg713/code-quests-adventure-in-syntax-land.git
+https://github.com/erikg713/code-quests.git
