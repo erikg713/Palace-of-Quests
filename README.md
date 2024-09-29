@@ -58,7 +58,38 @@ Players embark on a whimsical journey through various themed worlds, each repres
 
 ## Project Structure
 
-/palace-of-quests │ ├── backend (Flask) │ ├── app.py │ ├── requirements.txt │ ├── Dockerfile │ ├── routes │ ├── services │ ├── models │ └── utils │ ├── frontend (React) │ ├── public │ ├── src │ ├── package.json │ └── Dockerfile │ └── docker-compose.yml
+/codequest-adventure
+│
+├── backend (Flask)
+│   ├── app.py
+│   ├── blueprints
+│   │   ├── auth.py
+│   │   ├── levels.py
+│   │   ├── progress.py
+│   ├── models
+│   │   ├── user.py
+│   │   ├── level.py
+│   ├── services
+│   │   ├── auth_service.py
+│   │   ├── game_service.py
+│   ├── utils
+│   │   ├── encryption.py
+│   │   ├── jwt.py
+│   ├── config.py
+│   └── requirements.txt
+│
+├── frontend (React)
+│   ├── public
+│   ├── src
+│   │   ├── components
+│   │   ├── pages
+│   │   ├── App.js
+│   ├── package.json
+│   └── Dockerfile
+│
+├── docker-compose.yml
+└── README.md
+
 
 
 ## Features
