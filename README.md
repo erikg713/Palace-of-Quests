@@ -82,7 +82,3 @@ Players embark on a whimsical journey through various themed worlds, each repres
 - [Docker](https://www.docker.com/)
 - [Docker Compose](https://docs.docker.com/compose/install/)
 - [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/)
-
-### Cloning the Repository
-
-https://github.com/erikg713/code-quests.git
