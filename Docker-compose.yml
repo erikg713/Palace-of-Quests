@@ -1,32 +1,35 @@
-version: '3'
+version: '3.8'
+
 services:
   backend:
     build: ./backend
+    container_name: codequest-backend
     ports:
       - "5000:5000"
     environment:
-      - FLASK_ENV=development
+      - SECRET_KEY=${SECRET_KEY}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+      - DATABASE_URL=postgresql://user:password@db:5432/codequest_db
     depends_on:
       - db
 
   frontend:
     build: ./frontend
+    container_name: codequest-frontend
     ports:
       - "3000:3000"
+    environment:
+      - REACT_APP_API_URL=http://backend:5000
 
   db:
-    image: postgres
+    image: postgres:13
+    container_name: codequest-db
     environment:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
-      POSTGRES_DB: palace_of_quests_db
-    ports:
-      - "5432:5432"
+      POSTGRES_DB: codequest_db
+    volumes:
+      - db-data:/var/lib/postgresql/data
 
-
-### Running with Docker Compose
-
-1. Build and start the services:
-
-```bash
-docker-compose up --build
+volumes:
+  db-data:
