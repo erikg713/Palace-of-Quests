@@ -1,17 +1,21 @@
 import React from 'react';
-import QuestComponent from './components/QuestComponent';
-import './App.css';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import QuestPage from './pages/QuestPage';
+import LoginPage from './pages/LoginPage';
+import Navbar from './components/Navbar';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Welcome to Palace of Quests</h1>
-        <QuestComponent />
-      </header>
-    </div>
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/quest" element={<QuestPage />} />
+        <Route path="/login" element={<LoginPage />} />
+      </Routes>
+    </Router>
   );
 }
 
 export default App;
-
