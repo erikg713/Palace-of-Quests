@@ -13,31 +13,28 @@ function LoginPage() {
       localStorage.setItem('access_token', response.data.access_token);
       window.location.href = '/quest';
     } catch (err) {
-      setError('Invalid credentials. Please try again.');
+      setError('Invalid credentials');
     }
   };
 
   return (
     <div>
-      <h2>Login</h2>
       <form onSubmit={handleLogin}>
         <input
           type="text"
           placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          required
         />
         <input
           type="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          required
         />
         <button type="submit">Login</button>
+        {error && <p>{error}</p>}
       </form>
-      {error && <p>{error}</p>}
     </div>
   );
 }
