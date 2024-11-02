@@ -1,24 +1,11 @@
-# CodeQuest - Adventure in Syntax Land
+PiQuest Project Structure
 
-## Overview
-CodeQuest is a web-based adventure game where players learn programming concepts while completing quests and solving puzzles. 
+Project Overview
 
-## Technologies
-- **Frontend**: React.js
-- **Backend**: Flask (with SQLAlchemy for PostgreSQL)
-- **Database**: PostgreSQL
-- **Authentication**: JWT-based secure login
-- **Containerization**: Docker and Docker Compose
+The PiQuest structure is organized for a full-stack Web3 metaverse application with:
 
-## Setup
+Frontend: React (with Three.js for 3D elements) optimized for mobile and Pi Network compatibility.
 
-### Prerequisites
-- Docker
-- Docker Compose
-- Node.js
+Backend: Flask API with JWT authentication, secure password hashing, and robust error handling.
 
-### Running the Project
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/codequest-adventure.git
+Database: PostgreSQL with secure access control, structured for optimal performance with relational tables.
