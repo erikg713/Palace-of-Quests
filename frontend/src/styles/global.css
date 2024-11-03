@@ -1,0 +1,55 @@
+/* Basic Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+  color: #f4f4f9;
+  overflow: hidden;
+}
+
+/* 3D Buttons */
+.button {
+  background-color: #e91e63;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+/* Marketplace Card */
+.marketplace-card {
+  background-color: #333;
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.marketplace-card img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.marketplace-card h3 {
+  font-size: 1.2rem;
+  margin: 10px 0;
+}
+
+.marketplace-card button {
+  width: 100%;
+}
