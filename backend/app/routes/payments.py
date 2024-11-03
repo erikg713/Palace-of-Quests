@@ -22,3 +22,8 @@ def complete_payment():
         return jsonify({"message": f"Completed payment {payment_id}"})
     else:
         return jsonify({"error": "Completion failed"}), response.status_code
+@payments_bp.route("/cancelled_payment", methods=["POST"])
+def cancel_payment():
+    payment_id = request.json.get("paymentId")
+    # Custom cancellation handling logic here
+    return jsonify({"message": f"Payment {payment_id} canceled"})
