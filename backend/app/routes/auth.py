@@ -24,3 +24,18 @@ def login():
         response.set_cookie("access_token", token, httponly=True, secure=True)
         return response, 200
     return jsonify({"error": "Invalid credentials"}), 401
+from flask import Blueprint, request, jsonify
+import requests
+
+auth_bp = Blueprint("auth", __name__)
+
+@auth_bp.route("/signin", methods=["POST"])
+def signin():
+    access_token = request.json.get("authResult")["accessToken"]
+    headers = {"Authorization": f"Bearer {access_token}"}
+    response = requests.get("https://api.minepi.com/v2/me", headers=headers)
+
+    if response.status_code == 200:
+        return jsonify(response.json())
+    else:
+        return jsonify({"error": "User not authorized"}), 401
