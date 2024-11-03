@@ -21,3 +21,11 @@ CREATE TABLE quests (
 );
 
 CREATE INDEX idx_user_id ON users (id);
+
+CREATE TABLE payments (
+    id SERIAL PRIMARY KEY,
+    payment_id VARCHAR(100) UNIQUE NOT NULL,
+    status VARCHAR(50) NOT NULL,
+    txid VARCHAR(100),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
