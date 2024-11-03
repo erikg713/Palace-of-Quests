@@ -1,35 +1,31 @@
 version: '3.8'
-
 services:
-  backend:
-    build: ./backend
-    container_name: codequest-backend
-    ports:
-      - "5000:5000"
-    environment:
-      - SECRET_KEY=${SECRET_KEY}
-      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
-      - DATABASE_URL=postgresql://user:password@db:5432/codequest_db
-    depends_on:
-      - db
-
   frontend:
     build: ./frontend
-    container_name: codequest-frontend
     ports:
-      - "3000:3000"
+      - '3000:3000'
     environment:
-      - REACT_APP_API_URL=http://backend:5000
+      - REACT_APP_BACKEND_URL=http://backend:5000
 
-  db:
-    image: postgres:13
-    container_name: codequest-db
+  backend:
+    build: ./backend
+    ports:
+      - '5000:5000'
     environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: codequest_db
+      - DATABASE_URL=postgresql://gameuser:secure_password@database/piquest_db
+    depends_on:
+      - database
+
+  database:
+    image: postgres:latest
+    environment:
+      - POSTGRES_DB=piquest_db
+      - POSTGRES_USER=gameuser
+      - POSTGRES_PASSWORD=secure_password
+    ports:
+      - '5432:5432'
     volumes:
-      - db-data:/var/lib/postgresql/data
+      - pgdata:/var/lib/postgresql/data
 
 volumes:
-  db-data:
+  pgdata:
