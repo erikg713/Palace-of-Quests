@@ -33,3 +33,22 @@ def customize_avatar():
         avatar.helmet = value
     db.session.commit()
     return jsonify(avatar.to_dict())
+
+from flask import Blueprint, request, jsonify
+from app.models import Item, User, db
+
+inventory_bp = Blueprint("inventory", __name__)
+
+@inventory_bp.route("/sell_item/<int:item_id>", methods=["POST"])
+def sell_item(item_id):
+    item = Item.query.get(item_id)
+    user = User.query.get(1)  # Replace with actual user retrieval
+
+    if item and not item.equipped:
+        sell_price = item.value  # Define a `value` attribute in Item for sell price
+        user.currency += sell_price  # Add sell price to user's currency
+        db.session.delete(item)
+        db.session.commit()
+        return jsonify({"message": "Item sold", "currency": user.currency, "items": [i.to_dict() for i in user.items]})
+    else:
+        return jsonify({"error": "Item not found or is currently equipped"}), 400
