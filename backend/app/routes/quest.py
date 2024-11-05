@@ -1,3 +1,16 @@
+from flask import Blueprint, request, jsonify
+from app.models import Quest, db
+
+quest_bp = Blueprint("quest", __name__)
+
+@quest_bp.route("/get_quests", methods=["GET"])
+def get_quests():
+    quests = Quest.query.filter_by(user_id=1).all()
+    return jsonify([quest.to_dict() for quest in quests])
+
+@quest_bp.route("/complete_quest/<int:quest_id>", methods=["POST"])
+def complete_quest(quest_id):
+
 from flask import Blueprint, jsonify
 from app.models import Quest, Avatar, db
 
