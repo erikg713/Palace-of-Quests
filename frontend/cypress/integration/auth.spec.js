@@ -1,3 +1,25 @@
+describe("Authentication Flow", () => {
+  it("should authenticate the user with Pi Network successfully", () => {
+    cy.visit("http://localhost:3000");
+
+    cy.window().then((win) => {
+      win.Pi = {
+        authenticate: (scopes, onIncompletePaymentFound) => {
+          return Promise.resolve({ user: { username: "testuser" }, accessToken: "fake_access_token" });
+        }
+      };
+    });
+
+    cy.intercept("POST", "/auth/signin", (req) => {
+      expect(req.body.authResult.accessToken).to.equal("fake_access_token");
+      req.reply({ statusCode: 200, body: { username: "testuser" } });
+    });
+
+    cy.get("button").contains("Sign In with Pi").click();
+    cy.contains("Welcome, testuser").should("be.visible");
+  });
+});
+
 describe("Pi Network Authentication Flow", () => {
   it("should authenticate user with Pi Network", () => {
     // Visit the app's main page where the sign-in button is located
