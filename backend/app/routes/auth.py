@@ -1,4 +1,23 @@
 from flask import Blueprint, request, jsonify
+import requests
+import os
+
+auth_bp = Blueprint("auth", __name__)
+
+@auth_bp.route("/signin", methods=["POST"])
+def signin():
+    access_token = request.json.get("authResult")["accessToken"]
+    headers = {"Authorization": f"Bearer {access_token}"}
+    response = requests.get("https://api.minepi.com/v2/me", headers=headers)
+
+    if response.status_code == 200:
+        user_data = response.json()
+        # Process user_data as needed, e.g., create or update user in database
+        return jsonify(user_data)
+    else:
+        return jsonify({"error": "User not authorized"}), 401
+
+from flask import Blueprint, request, jsonify
 from werkzeug.security import generate_password_hash, check_password_hash
 from app.models import User, db
 from app.utils.security import create_jwt
