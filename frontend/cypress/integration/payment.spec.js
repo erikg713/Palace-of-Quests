@@ -110,3 +110,27 @@ describe("Payment Flow", () => {
     cy.contains("Payment completed").should("be.visible");
   });
 });
+
+it("should handle payment cancellation", () => {
+  cy.visit("http://localhost:3000/shop");
+
+  cy.window().then((win) => {
+    win.Pi = {
+      createPayment: (paymentData, callbacks) => {
+        callbacks.onCancel("fake_payment_id");
+        return Promise.reject(new Error("Payment canceled"));
+      }
+    };
+  });
+
+  cy.intercept("POST", "/cancelled_payment", (req) => {
+    expect(req.body.paymentId).to.equal("fake_payment_id");
+    req.reply({ statusCode: 200, body: { message: "Payment canceled" } });
+  }).as("cancelPayment");
+
+  cy.get("button").contains("Order Now").click();
+
+  cy.wait("@cancelPayment");
+
+  cy.contains("Payment canceled").should("be.visible");
+});
