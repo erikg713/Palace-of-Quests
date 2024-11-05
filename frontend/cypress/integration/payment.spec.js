@@ -76,3 +76,37 @@ it("should handle failed authentication gracefully", () => {
     expect(str).to.equal("Failed to authenticate with Pi Network.");
   });
 });
+
+describe("Payment Flow", () => {
+  it("should successfully complete a payment with Pi Network", () => {
+    cy.visit("http://localhost:3000/shop");
+
+    cy.window().then((win) => {
+      win.Pi = {
+        createPayment: (paymentData, callbacks) => {
+          callbacks.onReadyForServerApproval("fake_payment_id");
+          callbacks.onReadyForServerCompletion("fake_payment_id", "fake_txid");
+          return Promise.resolve({ paymentId: "fake_payment_id" });
+        }
+      };
+    });
+
+    cy.intercept("POST", "/approve", (req) => {
+      expect(req.body.paymentId).to.equal("fake_payment_id");
+      req.reply({ statusCode: 200, body: { message: "Payment approved" } });
+    }).as("approvePayment");
+
+    cy.intercept("POST", "/complete", (req) => {
+      expect(req.body.paymentId).to.equal("fake_payment_id");
+      expect(req.body.txid).to.equal("fake_txid");
+      req.reply({ statusCode: 200, body: { message: "Payment completed" } });
+    }).as("completePayment");
+
+    cy.get("button").contains("Order Now").click();
+
+    cy.wait("@approvePayment");
+    cy.wait("@completePayment");
+
+    cy.contains("Payment completed").should("be.visible");
+  });
+});
