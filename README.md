@@ -26,6 +26,36 @@ PiQuest is a Web3 quest-based RPG game where players explore a digital universe,
 3. Start the app: `npm start`
 
 PiQuest Project Structure
+PalaceOfQuests/
+├── frontend/
+│   ├── src/
+│   │   ├── api/
+│   │   ├── components/
+│   │   │   ├── Avatar.js
+│   │   │   ├── Inventory.js
+│   │   │   ├── Quest.js
+│   │   │   └── LevelUp.js
+│   │   ├── pages/
+│   │   │   ├── Home.js          # Main game hub
+│   │   │   ├── QuestPage.js     # Quest list and details
+│   │   │   ├── InventoryPage.js # Manage and equip items
+│   │   │   └── ProfilePage.js   # Avatar customization and stats
+│   │   └── styles/              # Styles for mobile and desktop
+│   ├── public/
+│   ├── .env.development
+│   ├── .env.production
+│   └── package.json
+│
+├── backend/
+│   ├── app/
+│   │   ├── models.py            # Expanded models for items, quests, notifications
+│   │   ├── routes/              # New routes for inventory, notifications
+│   │   └── utils/               # Utilities for push notifications
+│   ├── config.py
+│   ├── .env.development
+│   └── .env.production
+│
+└── README.md
 
 Project Overview
 
