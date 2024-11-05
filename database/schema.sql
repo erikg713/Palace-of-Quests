@@ -80,3 +80,7 @@ CREATE INDEX idx_payment_id ON payments (payment_id);
 
 ALTER TABLE quests 
     ADD COLUMN type VARCHAR(50) DEFAULT 'standard';
+
+ALTER TABLE items 
+    ADD COLUMN rarity VARCHAR(20) DEFAULT 'common',
+    ADD COLUMN upgrade_level INTEGER DEFAULT 1;
