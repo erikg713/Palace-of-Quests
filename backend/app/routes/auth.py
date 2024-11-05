@@ -39,3 +39,27 @@ def signin():
         return jsonify(response.json())
     else:
         return jsonify({"error": "User not authorized"}), 401
+
+from flask import Blueprint, request, jsonify
+import requests
+import os
+
+auth_bp = Blueprint("auth", __name__)
+PI_API_BASE_URL = "https://api.minepi.com/v2"
+PI_API_KEY = os.getenv("PI_API_KEY")
+
+@auth_bp.route("/signin", methods=["POST"])
+def signin():
+    access_token = request.json.get("authResult")["accessToken"]
+    headers = {"Authorization": f"Bearer {access_token}"}
+    
+    try:
+        response = requests.get(f"{PI_API_BASE_URL}/me", headers=headers)
+        response.raise_for_status()
+        return jsonify(response.json())
+    except requests.exceptions.HTTPError as http_err:
+        print(f"HTTP error occurred: {http_err}")
+        return jsonify({"error": "User verification failed"}), 401
+    except Exception as err:
+        print(f"Unexpected error: {err}")
+        return jsonify({"error": "An unexpected error occurred"}), 500
