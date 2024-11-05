@@ -1,3 +1,14 @@
+from flask import Blueprint, request, jsonify
+from app.models import Item, User, db
+
+inventory_bp = Blueprint("inventory", __name__)
+
+@inventory_bp.route("/sell_item/<int:item_id>", methods=["POST"])
+def sell_item(item_id):
+    item = Item.query.get(item_id)
+    if item and not item.equipped:
+        #
+
 @inventory_bp.route("/upgrade_item/<int:item_id>", methods=["POST"])
 def upgrade_item(item_id):
     item = Item.query.get(item_id)
