@@ -20,3 +20,49 @@ const onIncompletePaymentFound = (payment) => {
   console.log("Incomplete Payment Found:", payment);
   return axios.post("/incomplete", { payment });
 };
+
+// Initiate a payment request
+export const initiatePayment = async (amount, memo, metadata) => {
+  if (!window.Pi) {
+    alert("Pi SDK is not available.");
+    return;
+  }
+
+  const paymentData = { amount, memo, metadata };
+  const callbacks = {
+    onReadyForServerApproval,
+    onReadyForServerCompletion,
+    onCancel,
+    onError,
+  };
+
+  try {
+    const payment = await window.Pi.createPayment(paymentData, callbacks);
+    console.log("Payment initiated:", payment);
+  } catch (error) {
+    console.error("Payment initiation failed:", error);
+    alert("Failed to initiate payment. Please try again.");
+  }
+};
+
+// Callback when ready for server approval
+const onReadyForServerApproval = (paymentId) => {
+  axios.post("/approve", { paymentId });
+};
+
+// Callback when payment is ready for completion
+const onReadyForServerCompletion = (paymentId, txid) => {
+  axios.post("/complete", { paymentId, txid });
+};
+
+// Handle cancellation and errors
+const onCancel = (paymentId) => {
+  axios.post("/cancelled_payment", { paymentId });
+};
+
+const onError = (error, payment) => {
+  console.error("Payment Error:", error);
+  if (payment) {
+    console.error("Error Details:", payment);
+  }
+};
