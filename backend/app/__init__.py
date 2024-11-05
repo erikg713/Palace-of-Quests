@@ -40,3 +40,7 @@ def create_app():
         db.create_all()
 
     return app
+
+# backend/app/__init__.py
+from .routes import premium
+app.register_blueprint(premium.premium_bp, url_prefix='/premium')
