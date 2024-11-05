@@ -7,6 +7,32 @@ class User(db.Model):
     username = db.Column(db.String(50), unique=True, nullable=False)
     wallet_address = db.Column(db.String(100), nullable=False)
 
+class Quest(db.Model):
+    __tablename__ = 'quests'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.String(255))
+    is_completed = db.Column(db.Boolean, default=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+class Payment(db.Model):
+    __tablename__ = 'payments'
+    id = db.Column(db.Integer, primary_key=True)
+    payment_id = db.Column(db.String(100), unique=True, nullable=False)
+    status = db.Column(db.String(50), nullable=False, default="pending")
+    txid = db.Column(db.String(100))
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, onupdate=datetime.utcnow)
+
+from app import db
+from datetime import datetime
+
+class User(db.Model):
+    __tablename__ = 'users'
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(50), unique=True, nullable=False)
+    wallet_address = db.Column(db.String(100), nullable=False)
+
 class Avatar(db.Model):
     __tablename__ = 'avatars'
     id = db.Column(db.Integer, primary_key=True)
