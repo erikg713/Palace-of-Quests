@@ -31,3 +31,37 @@ describe("Pi Network Authentication Flow", () => {
     cy.contains("Welcome, test_user").should("exist");
   });
 });
+
+describe("Authentication Flow", () => {
+  it("should authenticate the user with Pi Network successfully", () => {
+    // Visit the login page
+    cy.visit("http://localhost:3000");
+
+    // Mock Pi.authenticate() in the browser
+    cy.window().then((win) => {
+      win.Pi = {
+        authenticate: (scopes, onIncompletePaymentFound) => {
+          return new Promise((resolve) => {
+            const fakeAuthResult = {
+              user: { username: "testuser" },
+              accessToken: "fake_access_token"
+            };
+            resolve(fakeAuthResult);
+          });
+        }
+      };
+    });
+
+    // Intercept and verify backend request
+    cy.intercept("POST", "/signin", (req) => {
+      expect(req.body.authResult.accessToken).to.equal("fake_access_token");
+      req.reply({ statusCode: 200, body: { username: "testuser" } });
+    }).as("signin");
+
+    // Trigger sign-in action
+    cy.get("button").contains("Sign In with Pi").click();
+
+    // Confirm user is successfully signed in
+    cy.contains("Welcome, testuser").should("be.visible");
+  });
+});
