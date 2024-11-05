@@ -98,3 +98,8 @@ CREATE TABLE user_achievements (
     date_earned TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (user_id, achievement_id)
 );
+
+ALTER TABLE avatars 
+    ADD COLUMN hairstyle VARCHAR(50) DEFAULT 'default',
+    ADD COLUMN weapon_skin VARCHAR(50) DEFAULT 'standard',
+    ADD COLUMN background_theme VARCHAR(50) DEFAULT 'plain';
