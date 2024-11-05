@@ -77,3 +77,6 @@ CREATE TABLE payments (
 
 CREATE INDEX idx_user_id ON users (id);
 CREATE INDEX idx_payment_id ON payments (payment_id);
+
+ALTER TABLE quests 
+    ADD COLUMN type VARCHAR(50) DEFAULT 'standard';
