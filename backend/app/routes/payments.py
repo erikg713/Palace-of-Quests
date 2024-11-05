@@ -1,4 +1,34 @@
 from flask import Blueprint, request, jsonify
+from app.utils.piAPI import approve_payment, complete_payment
+
+payments_bp = Blueprint("payments", __name__)
+
+@payments_bp.route("/approve", methods=["POST"])
+def approve():
+    payment_id = request.json.get("paymentId")
+    try:
+        result = approve_payment(payment_id)
+        return jsonify({"message": f"Payment {payment_id} approved successfully"})
+    except Exception as e:
+        return jsonify({"error": "Approval failed"}), 500
+
+@payments_bp.route("/complete", methods=["POST"])
+def complete():
+    payment_id = request.json.get("paymentId")
+    txid = request.json.get("txid")
+    try:
+        result = complete_payment(payment_id, txid)
+        return jsonify({"message": f"Payment {payment_id} completed successfully"})
+    except Exception as e:
+        return jsonify({"error": "Completion failed"}), 500
+
+@payments_bp.route("/cancelled_payment", methods=["POST"])
+def cancel_payment():
+    payment_id = request.json.get("paymentId")
+    # Handle custom logic for canceled payments if needed
+    return jsonify({"message": f"Payment {payment_id} canceled"})
+
+from flask import Blueprint, request, jsonify
 from .utils import piAPI
 
 payments_bp = Blueprint("payments", __name__)
