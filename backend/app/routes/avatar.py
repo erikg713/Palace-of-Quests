@@ -3,6 +3,25 @@ from app.models import Avatar, db
 
 avatar_bp = Blueprint("avatar", __name__)
 
+@avatar_bp.route("/get_avatar", methods=["GET"])
+def get_avatar():
+    # Assume current user has ID of 1 for simplicity
+    avatar = Avatar.query.filter_by(user_id=1).first()
+    return jsonify(avatar.to_dict())
+
+@avatar_bp.route("/upgrade_avatar", methods=["POST"])
+def upgrade_avatar():
+    avatar = Avatar.query.filter_by(user_id=1).first()
+    if avatar.level < 250:
+        avatar.level += 1
+        db.session.commit()
+    return jsonify(avatar.to_dict())
+
+from flask import Blueprint, request, jsonify
+from app.models import Avatar, db
+
+avatar_bp = Blueprint("avatar", __name__)
+
 @avatar_bp.route("/customize_avatar", methods=["POST"])
 def customize_avatar():
     data = request.get_json()
