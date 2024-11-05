@@ -40,3 +40,6 @@ def update_payment_status(payment_id, status, txid=None):
         payment.txid = txid
         payment.updated_at = datetime.utcnow()
         db.session.commit()
+
+ALTER TABLE payments
+ADD COLUMN status VARCHAR(50) DEFAULT 'pending';
