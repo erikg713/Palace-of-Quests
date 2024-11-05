@@ -103,3 +103,12 @@ ALTER TABLE avatars
     ADD COLUMN hairstyle VARCHAR(50) DEFAULT 'default',
     ADD COLUMN weapon_skin VARCHAR(50) DEFAULT 'standard',
     ADD COLUMN background_theme VARCHAR(50) DEFAULT 'plain';
+
+CREATE TABLE level_rewards (
+    level INTEGER PRIMARY KEY,
+    reward_name VARCHAR(100),
+    reward_description TEXT,
+    stat_boost INTEGER DEFAULT 0,
+    item_unlock VARCHAR(100),
+    quest_difficulty INTEGER
+);
