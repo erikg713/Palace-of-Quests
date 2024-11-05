@@ -135,3 +135,12 @@ CREATE TABLE level_rewards (
     item_unlock VARCHAR(100),
     quest_difficulty INTEGER
 );
+
+CREATE TABLE premium_benefits (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) UNIQUE NOT NULL,
+    description TEXT,
+    price_pi DECIMAL(10, 2) NOT NULL,
+    benefit_type VARCHAR(50),
+    duration_days INTEGER DEFAULT 0  -- Duration for time-limited benefits
+);
