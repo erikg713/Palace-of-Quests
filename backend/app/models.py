@@ -1,4 +1,37 @@
 from app import db
+from datetime import datetime
+
+class User(db.Model):
+    __tablename__ = 'users'
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(50), unique=True, nullable=False)
+    wallet_address = db.Column(db.String(100), nullable=False)
+
+class Avatar(db.Model):
+    __tablename__ = 'avatars'
+    id = db.Column(db.Integer, primary_key=True)
+    level = db.Column(db.Integer, default=1)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    items = db.relationship('Item', backref='avatar', lazy=True)
+
+class Quest(db.Model):
+    __tablename__ = 'quests'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    difficulty = db.Column(db.Integer, nullable=False)
+    is_completed = db.Column(db.Boolean, default=False)
+    reward_points = db.Column(db.Integer)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+class Item(db.Model):
+    __tablename__ = 'items'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.String(255))
+    equipped = db.Column(db.Boolean, default=False)
+    avatar_id = db.Column(db.Integer, db.ForeignKey('avatars.id'))
+
+from app import db
 
 class User(db.Model):
     __tablename__ = 'users'
@@ -33,3 +66,4 @@ class LevelReward(db.Model):
             "item_unlock": self.item_unlock,
             "quest_difficulty": self.quest_difficulty
         }
+
