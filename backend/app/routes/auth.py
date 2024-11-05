@@ -63,3 +63,19 @@ def signin():
     except Exception as err:
         print(f"Unexpected error: {err}")
         return jsonify({"error": "An unexpected error occurred"}), 500
+
+from flask import Blueprint, request, jsonify
+import requests
+
+auth_bp = Blueprint("auth", __name__)
+
+@auth_bp.route("/signin", methods=["POST"])
+def signin():
+    access_token = request.json.get("authResult")["accessToken"]
+    headers = {"Authorization": f"Bearer {access_token}"}
+    response = requests.get("https://api.minepi.com/v2/me", headers=headers)
+
+    if response.status_code == 200:
+        return jsonify(response.json())
+    else:
+        return jsonify({"error": "User not authorized"}), 401
