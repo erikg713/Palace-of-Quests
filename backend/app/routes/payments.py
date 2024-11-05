@@ -1,3 +1,20 @@
+from flask import Blueprint, request, jsonify
+from .utils import piAPI
+
+payments_bp = Blueprint("payments", __name__)
+
+@payments_bp.route("/approve", methods=["POST"])
+def approve():
+    payment_id = request.json.get("paymentId")
+    try:
+        piAPI.approve_payment(payment_id)
+        return jsonify({"message": "Payment approved"})
+    except Exception as e:
+        return jsonify({"error": "Approval failed"}), 500
+
+@payments_bp.route("/complete", methods=["POST"])
+def complete():
+
 @payments_bp.route("/approve", methods=["POST"])
 def approve_payment():
     payment_id = request.json.get("paymentId")
