@@ -162,6 +162,190 @@ SSL Enforcement: Configures PostgreSQL to enforce SSL for secure data transmissi
 Indexes: Indexed columns (e.g., username and item_id) ensure quick retrieval, especially for marketplace data.
 
 
+File: README.md (continued)
+
+# PiQuest
+
+**PiQuest** is a Web3 metaverse game built on the Pi Network, allowing users to sign in, participate in a marketplace, complete quests, and bridge assets with Tide Network and Ethereum.
+
+## Project Structure
+
+PiQuest/ ├── frontend/                  # React frontend ├── backend/                   # Flask backend ├── database/                  # Database schema and roles ├── docker-compose.yml         # Docker Compose setup └── README.md                  # Project overview and instructions
+
+## Features
+
+- **User Authentication**: Sign in with Pi Network.
+- **Marketplace**: Buy and sell items.
+- **Quests**: Complete in-game tasks for rewards.
+- **Cross-Chain**: Interact with Tide Network and Ethereum.
+
+## Installation
+
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/your-username/piquest.git
+
+2. Setup Frontend
+
+Navigate to the frontend directory, install dependencies, and start the application:
+
+cd frontend
+npm install
+npm start
+
+
+3. Setup Backend
+
+Navigate to the backend directory, install dependencies, and start the Flask app:
+
+cd backend
+pip install -r requirements.txt
+flask run
+
+
+4. Initialize Database
+
+Navigate to the database directory and run SQL scripts to set up the database schema and roles:
+
+cd database
+psql -U postgres -d piquest_db -f schema.sql
+psql -U postgres -d piquest_db -f roles.sql
+
+
+5. Run with Docker Compose
+
+To start all services (frontend, backend, and database) using Docker Compose, use:
+
+docker-compose up --build -d
+
+
+
+Environment Variables
+
+Create .env files in both the frontend and backend directories with the following settings:
+
+.env for Backend
+
+DATABASE_URL=postgresql://gameuser:your_secure_password@database/piquest_db
+JWT_SECRET_KEY=your_jwt_secret_key
+PI_API_KEY=your_pi_api_key
+
+.env for Frontend
+
+REACT_APP_BACKEND_URL=http://localhost:5000
+
+Running Tests
+
+PiQuest uses Cypress for end-to-end (E2E) testing, covering the authentication and payment flows.
+
+Setting Up Cypress
+
+1. Install Cypress in the frontend directory:
+
+cd frontend
+npm install cypress --save-dev
+
+
+2. Run Cypress Tests:
+
+Interactive Mode:
+
+npx cypress open
+
+Headless Mode (for CI/CD pipelines):
+
+npx cypress run
+
+
+
+
+Test Scenarios
+
+Authentication: Verifies successful and failed user sign-ins.
+
+Payment Flow: Tests payment lifecycle (approval, completion, cancellation).
+
+Error Handling: Simulates various error scenarios to ensure proper user feedback.
+
+
+Deployment
+
+Using Docker Compose for Deployment
+
+1. Prepare Environment Variables: Ensure .env files contain the correct production values.
+
+
+2. Build and Start the Application:
+
+docker-compose up --build -d
+
+
+
+Production Deployment
+
+Frontend: Deploy the static build of the frontend (e.g., Vercel or Netlify).
+
+Backend: Use a cloud provider for backend deployment (e.g., AWS, Heroku, or DigitalOcean).
+
+Database: Host the database using a managed PostgreSQL service.
+
+
+CI/CD Integration
+
+Integrate Cypress tests into your CI/CD pipeline (e.g., GitHub Actions, GitLab CI).
+
+Use environment variables to manage secrets and configuration across environments (e.g., .env.production).
+
+
+Security Considerations
+
+1. JWT and Cookie Security: Use httponly and secure flags on cookies to store JWTs, protecting them from JavaScript access and ensuring HTTPS-only transmission.
+
+
+2. Database Access Restrictions: Limit database access with roles (e.g., gameuser) to prevent unauthorized access.
+
+
+3. Environment Variables: Keep sensitive keys like PI_API_KEY in environment variables and avoid hardcoding them.
+
+
+4. Content Security Policy (CSP): Implement CSP headers to restrict content sources, mitigating XSS attacks.
+
+
+5. SSL/TLS: Enforce HTTPS to secure data in transit between clients and servers.
+
+
+
+Contributing
+
+We welcome contributions to PiQuest! Here’s how to get started:
+
+1. Fork the repository.
+
+
+2. Create a branch for your feature or bugfix: git checkout -b feature-name.
+
+
+3. Commit your changes and push the branch.
+
+
+4. Create a Pull Request to the main branch.
+
+
+
+Code Style Guidelines
+
+Python: Follow PEP 8 for Python code style.
+
+JavaScript: Use ESLint recommendations for JavaScript.
+
+SQL: Use uppercase for SQL keywords and lowercase for table/column names.
+
+
+License
+
+This project is licensed under the MIT License. See the LICENSE file for details.
+
+
 
 4. Docker Compose Setup (docker-compose.yml)
 
