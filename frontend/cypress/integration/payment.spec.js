@@ -58,3 +58,21 @@ describe("Pi Network Payment Flow", () => {
     cy.contains("Payment canceled").should("exist");
   });
 });
+
+it("should handle failed authentication gracefully", () => {
+  cy.visit("http://localhost:3000");
+
+  cy.window().then((win) => {
+    win.Pi = {
+      authenticate: () => {
+        return Promise.reject(new Error("Authentication failed"));
+      }
+    };
+  });
+
+  cy.get("button").contains("Sign In with Pi").click();
+
+  cy.on("window:alert", (str) => {
+    expect(str).to.equal("Failed to authenticate with Pi Network.");
+  });
+});
