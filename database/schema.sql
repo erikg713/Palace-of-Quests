@@ -1,6 +1,29 @@
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     username VARCHAR(50) UNIQUE NOT NULL,
+    wallet_address VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE quests (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    description TEXT,
+    is_completed BOOLEAN DEFAULT FALSE,
+    user_id INTEGER REFERENCES users(id)
+);
+
+CREATE TABLE payments (
+    id SERIAL PRIMARY KEY,
+    payment_id VARCHAR(100) UNIQUE NOT NULL,
+    status VARCHAR(50) NOT NULL DEFAULT 'pending',
+    txid VARCHAR(100),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP
+);
+
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
     password_hash VARCHAR(128) NOT NULL,
     wallet_address VARCHAR(100)
 );
