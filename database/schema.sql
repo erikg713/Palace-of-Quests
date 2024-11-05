@@ -84,3 +84,17 @@ ALTER TABLE quests
 ALTER TABLE items 
     ADD COLUMN rarity VARCHAR(20) DEFAULT 'common',
     ADD COLUMN upgrade_level INTEGER DEFAULT 1;
+
+CREATE TABLE achievements (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100),
+    description TEXT,
+    points INTEGER DEFAULT 10
+);
+
+CREATE TABLE user_achievements (
+    user_id INTEGER REFERENCES users(id),
+    achievement_id INTEGER REFERENCES achievements(id),
+    date_earned TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (user_id, achievement_id)
+);
