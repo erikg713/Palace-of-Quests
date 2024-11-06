@@ -1,6 +1,9 @@
-Palace of Quests-Pi Quest
+---README.md---
 
-Palace of Quests-Pi Quest is a decentralized marketplace where users can complete quests, buy and sell digital items, and earn rewards—all on the Pi Network. This Web3-powered platform is designed for secure, cross-chain transactions, and it will soon expand to support Ethereum and Polygon networks for seamless multi-chain functionality.
+Palace of Quests
+
+Palace of Quests is a decentralized marketplace where users can complete quests, buy and sell digital items, and earn rewards—all on the Pi Network. This Web3-powered platform is designed for secure, cross-chain transactions, and it will soon expand to support Ethereum and Bitcoin networks for seamless multi-chain functionality. With every sale, Palace of Quests takes a 10% profit, enabling you to generate revenue passively.
+
 
 ---
 
@@ -39,59 +42,63 @@ Table of Contents
 
 Project Overview
 
-Palace of Quests-Pi Quest combines Web3 innovation with marketplace simplicity. Running on the Pi Network, the platform aims to redefine digital economies by enabling decentralized transactions, in-game item trading, and quest-based user engagement. By leveraging Pi Network’s Payment Identifier system, Palace of Quests ensures secure, rapid payments.
+Palace of Quests (a.k.a. PyQuest or Restructure) combines Web3 innovation with marketplace simplicity. Running on the Pi Network, the platform aims to redefine digital economies by enabling decentralized transactions, in-game item trading, and quest-based user engagement. By leveraging Pi Network’s Payment Identifier system, Palace of Quests ensures secure, rapid payments.
 
-# Key Highlights:
+Key Highlights:
 
-# Decentralized: Utilizes Pi Network’s blockchain.
+Decentralized: Utilizes Pi Network’s blockchain.
 
-# Expandable: Plans to integrate with Ethereum and Bitcoin through cross-chain bridges.
+Expandable: Plans to integrate with Ethereum and Bitcoin through cross-chain bridges.
 
----
-
-### Features ###
-
-## Quest System: Users can complete tasks or "quests" to earn rewards, building engagement and loyalty.
-
-## Marketplace: A platform for users to buy, sell, and trade digital items securely.
-
-## Secure Transactions: Built with Pi Network’s Payment Identifier for safe payment processing.
-
-## Cross-Chain Expansion: Planned support for Ethereum and Bitcoin networks.
-
-## Progressive Web App (PWA): Accessible on any device, with offline capabilities.
+Revenue Model: Earns a 10% profit from each marketplace sale.
 
 
 
 ---
 
-## Technology Stack ##
+Features
 
-## Frontend: React (via Create React App)
+Quest System: Users can complete tasks or "quests" to earn rewards, building engagement and loyalty.
 
-## Backend: Flask for API and server
+Marketplace: A platform for users to buy, sell, and trade digital items securely.
 
-## Database: PostgreSQL for reliable data management
+Secure Transactions: Built with Pi Network’s Payment Identifier for safe payment processing.
 
-## Blockchain Integration: Pi Network for initial launch; planned expansion to Ethereum and Bitcoin
+Cross-Chain Expansion: Planned support for Ethereum and Bitcoin networks.
 
-## Web3 Libraries: Tools for blockchain interactions, like Ethers.js or Web3.js for future bridges
+Progressive Web App (PWA): Accessible on any device, with offline capabilities.
 
 
 
 ---
 
-### Installation and Setup ###
+Technology Stack
 
-## 1. Clone the Repository:
+Frontend: React (via Create React App)
 
- git clone https://github.com/your-username/palace-of-quests.git
- cd palace-of-quests 
+Backend: Flask for API and server
+
+Database: PostgreSQL for reliable data management
+
+Blockchain Integration: Pi Network for initial launch; planned expansion to Ethereum and Bitcoin
+
+Web3 Libraries: Tools for blockchain interactions, like Ethers.js or Web3.js for future bridges
 
 
-# 2. Backend Setup:
 
- Install dependencies:
+---
+
+Installation and Setup
+
+1. Clone the Repository:
+
+git clone https://github.com/your-username/palace-of-quests.git
+cd palace-of-quests
+
+
+2. Backend Setup:
+
+Install dependencies:
 
 pip install -r requirements.txt
 
@@ -101,7 +108,7 @@ flask run
 
 
 
-# 3. Frontend Setup:
+3. Frontend Setup:
 
 Navigate to the frontend folder:
 
@@ -117,9 +124,9 @@ npm start
 
 
 
-# 4. Database Setup:
+4. Database Setup:
 
-### Set up a PostgreSQL database and configure it in the .env file. ###
+Set up a PostgreSQL database and configure it in the .env file.
 
 
 
@@ -129,25 +136,25 @@ npm start
 
 Usage
 
-# 1. Register/Login: Sign up with a Pi Network wallet to access the marketplace and quest features.
+1. Register/Login: Sign up with a Pi Network wallet to access the marketplace and quest features.
 
 
-# 2. Complete Quests: Engage in quests to earn in-app rewards and level up.
+2. Complete Quests: Engage in quests to earn in-app rewards and level up.
 
 
-# 3. Marketplace: Buy and sell items with other users.
+3. Marketplace: Buy and sell items with other users.
 
 
-# 4. Payments: All transactions use Pi Network’s secure Payment Identifier, ensuring trust and speed.
+4. Payments: All transactions use Pi Network’s secure Payment Identifier, ensuring trust and speed.
 
 
 
-### Note: Ethereum and Polygon support will be introduced in later phases. ###
+Note: Ethereum and Bitcoin support will be introduced in later phases.
 
 
 ---
 
-## Monetization Strategy ##
+Monetization Strategy
 
 Palace of Quests earns a 10% commission on each marketplace transaction, creating a steady income stream. To maximize revenue:
 
@@ -164,13 +171,13 @@ Palace of Quests earns a 10% commission on each marketplace transaction, creatin
 
 ---
 
-### Roadmap ###
+Roadmap
 
 Phase 1: Launch on Pi Network with marketplace and quest functionalities.
 
 Phase 2: Introduce premium quests and in-app purchases.
 
-Phase 3: Implement Ethereum and Polygon cross-chain bridges for multi-chain functionality.
+Phase 3: Implement Ethereum and Bitcoin cross-chain bridges for multi-chain functionality.
 
 
 
