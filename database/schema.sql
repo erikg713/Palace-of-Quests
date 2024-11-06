@@ -150,3 +150,18 @@ VALUES
 ('XP Boost', 'Double experience points for 7 days', 5.00, 'xp_boost', 7),
 ('Exclusive Sword', 'A powerful sword only available to premium members', 3.00, 'item', 0),
 ('Premium Guild Pass', 'Access to elite guilds with exclusive quests', 10.00, 'guild_access', 30);
+
+CREATE TABLE IF NOT EXISTS premium_benefits (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) UNIQUE NOT NULL,
+    description TEXT,
+    price_pi DECIMAL(10, 2) NOT NULL,
+    benefit_type VARCHAR(50) CHECK (benefit_type IN ('xp_boost', 'item', 'guild_access')),
+    duration_days INTEGER DEFAULT 0 CHECK (duration_days >= 0)
+);
+
+INSERT INTO premium_benefits (name, description, price_pi, benefit_type, duration_days)
+VALUES 
+('XP Boost', 'Double experience points for 7 days', 5.00, 'xp_boost', 7),
+('Exclusive Sword', 'A powerful sword only available to premium members', 3.00, 'item', 0),
+('Premium Guild Pass', 'Access to elite guilds with exclusive quests', 10.00, 'guild_access', 30);
