@@ -1,394 +1,221 @@
-# PiQuest - Web3 Game on Pi Network
+###Palace of Quests###
 
-## Overview
-PiQuest is a Web3 quest-based RPG game where players explore a digital universe, earn Pi tokens, and complete challenges.
+Palace of Quests is a decentralized marketplace where users can complete quests, buy and sell digital items, and earn rewards—all on the Pi Network. This Web3-powered platform is designed for secure, cross-chain transactions, and it will soon expand to support Ethereum and Bitcoin networks for seamless multi-chain functionality. With every sale, Palace of Quests takes a 10% profit, enabling you to generate revenue passively.
 
-### Key Features
-- Quest-based RPG mechanics
-- NFT marketplace for trading in-game items
-- Integration with Pi Network for token transactions
 
-### Technologies Used
-- Backend: Flask, PostgreSQL
-- Frontend: React
-- Authentication: JWT
+---
 
-## Setup Instructions
+Table of Contents
 
-### Backend
-1. Navigate to the `backend` folder.
-2. Install dependencies: `pip install -r requirements.txt`
-3. Run the server: `python app.py`
+1. Project Overview
 
-### Frontend
-1. Navigate to the `frontend` folder.
-2. Install dependencies: `npm install`
-3. Start the app: `npm start`
 
-PiQuest Project Structure
-PalaceOfQuests/
-├── frontend/
-│   ├── src/
-│   │   ├── api/
-│   │   ├── components/
-│   │   │   ├── Avatar.js
-│   │   │   ├── Inventory.js
-│   │   │   ├── Quest.js
-│   │   │   └── LevelUp.js
-│   │   ├── pages/
-│   │   │   ├── Home.js          # Main game hub
-│   │   │   ├── QuestPage.js     # Quest list and details
-│   │   │   ├── InventoryPage.js # Manage and equip items
-│   │   │   └── ProfilePage.js   # Avatar customization and stats
-│   │   └── styles/              # Styles for mobile and desktop
-│   ├── public/
-│   ├── .env.development
-│   ├── .env.production
-│   └── package.json
-│
-├── backend/
-│   ├── app/
-│   │   ├── models.py            # Expanded models for items, quests, notifications
-│   │   ├── routes/              # New routes for inventory, notifications
-│   │   └── utils/               # Utilities for push notifications
-│   ├── config.py
-│   ├── .env.development
-│   └── .env.production
-│
-└── README.md
+2. Features
+
+
+3. Technology Stack
+
+
+4. Installation and Setup
+
+
+5. Usage
+
+
+6. Monetization Strategy
+
+
+7. Roadmap
+
+
+8. Contributing
+
+
+9. License
+
+
+
+
+---
 
 Project Overview
 
-The PiQuest structure is organized for a full-stack Web3 metaverse application with:
+Palace of Quests (a.k.a. PyQuest or Restructure) combines Web3 innovation with marketplace simplicity. Running on the Pi Network, the platform aims to redefine digital economies by enabling decentralized transactions, in-game item trading, and quest-based user engagement. By leveraging Pi Network’s Payment Identifier system, Palace of Quests ensures secure, rapid payments.
 
-Frontend: React (with Three.js for 3D elements) optimized for mobile and Pi Network compatibility.
+Key Highlights:
 
-Backend: Flask API with JWT authentication, secure password hashing, and robust error handling.
+Decentralized: Utilizes Pi Network’s blockchain.
 
-Database: PostgreSQL with secure access control, structured for optimal performance with relational tables.
+Expandable: Plans to integrate with Ethereum and Bitcoin through cross-chain bridges.
 
-
-Unified Project Structure
-PiQuest/
-│
-├── frontend/                  # React frontend
-│   ├── src/
-│   │   ├── api/               # API integration
-│   │   ├── components/        # UI components
-│   │   ├── pages/             # Page components (Home, Profile, Marketplace)
-│   │   ├── App.js             # Main app component
-│   │   ├── index.js           # React entry point
-│   │   └── styles/            # Global and component-specific styles
-│   ├── public/
-│   └── package.json           # Frontend dependencies
-│
-├── backend/                   # Flask backend
-│   ├── app/
-│   │   ├── __init__.py        # App factory
-│   │   ├── config.py          # Configurations (e.g., for database, JWT)
-│   │   ├── models.py          # SQLAlchemy models
-│   │   ├── routes/            # Blueprints (auth, marketplace, quests)
-│   │   └── utils/             # Helper functions and utilities
-│   ├── requirements.txt       # Backend dependencies
-│   └── Dockerfile             # Backend Docker setup
-│
-├── database/
-│   ├── schema.sql             # Database schema
-│   └── roles.sql              # Role-based access configuration
-│
-├── .env.example               # Example environment variables file
-├── docker-compose.yml         # Docker Compose setup
-├── LICENSE                    # License file
-└── README.md                  # Project overview and instructions
----
-
-Detailed Explanation of Each Directory and Key Files
-
-1. Frontend Directory (frontend/)
-
-The frontend directory contains a mobile-optimized React app integrated with Pi Network for a Web3 experience.
-
-public/manifest.json: Configures the Progressive Web App (PWA) for Pi Network compatibility, with required icons.
-
-src/components/: Houses reusable UI components, such as MobileNav.js for responsive mobile navigation and ThreeDScene.js for 3D interactions with Three.js.
-
-src/pages/: Contains key pages (e.g., Marketplace.js) for the main features of the app, each with error handling and secure data fetching.
-
-src/api/auth.js: API utility for handling authentication calls, with centralized error handling and secure token management.
-
-.env: Stores frontend environment variables, keeping secrets out of source control.
-
-
-2. Backend Directory (backend/)
-
-The backend directory hosts a secure Flask REST API, handling user authentication, game mechanics, and marketplace interactions.
-
-app/__init__.py: Initializes the Flask app, loads configurations, and sets up database connections.
-
-app/models.py: Defines relational database models (e.g., User, Inventory, and Quests) and relationships, with indexes for performance.
-
-app/routes/:
-
-auth.py: Handles registration, login, and secure JWT-based authentication.
-
-marketplace.py: Manages marketplace item listing, buying, and selling.
-
-quests.py: Routes for quest creation, tracking, and completion rewards.
-
-
-app/utils/security.py: Contains security functions for hashing passwords, creating JWT tokens, and managing token expiration.
-
-app/error_handler.py: Provides centralized error handling for consistency, with error responses (e.g., 404, 500).
-
-config.py: Central configuration file, loaded with environment variables for security, including SECRET_KEY, JWT_SECRET_KEY, and DATABASE_URL.
-
-.env: Contains backend secrets like JWT keys and database URLs, secured and hidden from source control.
-
-
-3. Database Directory (database/)
-
-The database directory includes scripts for setting up PostgreSQL with secure access control and relational structures.
-
-schema.sql: Defines the database schema for Users, Inventory, Quests, and Transactions tables, optimized with indexes on frequently accessed columns.
-
-seed.sql: Optional seed data for testing and initial setup.
-
-roles.sql: Sets up role-based access for PostgreSQL, granting only necessary permissions to each role for security.
+Revenue Model: Earns a 10% profit from each marketplace sale.
 
 
 
 ---
 
-Security and Optimization Highlights
+Features
 
-1. Frontend Security
+Quest System: Users can complete tasks or "quests" to earn rewards, building engagement and loyalty.
 
-Secure Cookies: JWT tokens are stored in httponly, secure cookies to prevent client-side access.
+Marketplace: A platform for users to buy, sell, and trade digital items securely.
 
-Input Validation: All inputs are validated on both frontend and backend.
+Secure Transactions: Built with Pi Network’s Payment Identifier for safe payment processing.
 
-Error Handling: Centralized error handling in api/auth.js to provide user-friendly feedback.
+Cross-Chain Expansion: Planned support for Ethereum and Bitcoin networks.
 
-
-
-2. Backend Security
-
-JWT Authentication: Using app/utils/security.py to securely create and verify tokens, with JWT stored in httponly cookies.
-
-Password Hashing: Securely hashing passwords using werkzeug.security.generate_password_hash.
-
-Centralized Error Handling: app/error_handler.py intercepts all errors to provide consistent JSON responses.
-
-Rate Limiting (Optional): Implement rate limiting middleware to prevent abuse, especially for critical endpoints.
+Progressive Web App (PWA): Accessible on any device, with offline capabilities.
 
 
 
-3. Database Security
+---
 
-Role-Based Access Control: Only designated roles (e.g., gameuser) have permission to read/write to tables, minimizing risk.
+Technology Stack
 
-SSL Enforcement: Configures PostgreSQL to enforce SSL for secure data transmission.
+Frontend: React (via Create React App)
 
-Indexes: Indexed columns (e.g., username and item_id) ensure quick retrieval, especially for marketplace data.
+Backend: Flask for API and server
 
+Database: PostgreSQL for reliable data management
 
-File: README.md (continued)
+Blockchain Integration: Pi Network for initial launch; planned expansion to Ethereum and Bitcoin
 
-# PiQuest
-
-**PiQuest** is a Web3 metaverse game built on the Pi Network, allowing users to sign in, participate in a marketplace, complete quests, and bridge assets with Tide Network and Ethereum.
-
-## Project Structure
-
-PiQuest/ ├── frontend/                  # React frontend ├── backend/                   # Flask backend ├── database/                  # Database schema and roles ├── docker-compose.yml         # Docker Compose setup └── README.md                  # Project overview and instructions
-
-## Features
-
-- **User Authentication**: Sign in with Pi Network.
-- **Marketplace**: Buy and sell items.
-- **Quests**: Complete in-game tasks for rewards.
-- **Cross-Chain**: Interact with Tide Network and Ethereum.
-
-## Installation
-
-1. **Clone the Repository**
-   ```bash
-   git clone https://github.com/your-username/piquest.git
-
-2. Setup Frontend
-
-Navigate to the frontend directory, install dependencies, and start the application:
-
-cd frontend
-npm install
-npm start
+Web3 Libraries: Tools for blockchain interactions, like Ethers.js or Web3.js for future bridges
 
 
-3. Setup Backend
 
-Navigate to the backend directory, install dependencies, and start the Flask app:
+---
 
-cd backend
+Installation and Setup
+
+1. Clone the Repository:
+
+git clone https://github.com/your-username/palace-of-quests.git
+cd palace-of-quests
+
+
+2. Backend Setup:
+
+Install dependencies:
+
 pip install -r requirements.txt
+
+Start the Flask server:
+
 flask run
 
 
-4. Initialize Database
 
-Navigate to the database directory and run SQL scripts to set up the database schema and roles:
+3. Frontend Setup:
 
-cd database
-psql -U postgres -d piquest_db -f schema.sql
-psql -U postgres -d piquest_db -f roles.sql
+Navigate to the frontend folder:
 
+cd client
 
-5. Run with Docker Compose
+Install dependencies:
 
-To start all services (frontend, backend, and database) using Docker Compose, use:
+npm install
 
-docker-compose up --build -d
+Run the React app:
 
-
-
-Environment Variables
-
-Create .env files in both the frontend and backend directories with the following settings:
-
-.env for Backend
-
-DATABASE_URL=postgresql://gameuser:your_secure_password@database/piquest_db
-JWT_SECRET_KEY=your_jwt_secret_key
-PI_API_KEY=your_pi_api_key
-
-.env for Frontend
-
-REACT_APP_BACKEND_URL=http://localhost:5000
-
-Running Tests
-
-PiQuest uses Cypress for end-to-end (E2E) testing, covering the authentication and payment flows.
-
-Setting Up Cypress
-
-1. Install Cypress in the frontend directory:
-
-cd frontend
-npm install cypress --save-dev
+npm start
 
 
-2. Run Cypress Tests:
 
-Interactive Mode:
+4. Database Setup:
 
-npx cypress open
-
-Headless Mode (for CI/CD pipelines):
-
-npx cypress run
+Set up a PostgreSQL database and configure it in the .env file.
 
 
 
 
-Test Scenarios
 
-Authentication: Verifies successful and failed user sign-ins.
+---
 
-Payment Flow: Tests payment lifecycle (approval, completion, cancellation).
+Usage
 
-Error Handling: Simulates various error scenarios to ensure proper user feedback.
-
-
-Deployment
-
-Using Docker Compose for Deployment
-
-1. Prepare Environment Variables: Ensure .env files contain the correct production values.
+1. Register/Login: Sign up with a Pi Network wallet to access the marketplace and quest features.
 
 
-2. Build and Start the Application:
+2. Complete Quests: Engage in quests to earn in-app rewards and level up.
 
-docker-compose up --build -d
+
+3. Marketplace: Buy and sell items with other users.
+
+
+4. Payments: All transactions use Pi Network’s secure Payment Identifier, ensuring trust and speed.
 
 
 
-Production Deployment
-
-Frontend: Deploy the static build of the frontend (e.g., Vercel or Netlify).
-
-Backend: Use a cloud provider for backend deployment (e.g., AWS, Heroku, or DigitalOcean).
-
-Database: Host the database using a managed PostgreSQL service.
+Note: Ethereum and Bitcoin support will be introduced in later phases.
 
 
-CI/CD Integration
+---
 
-Integrate Cypress tests into your CI/CD pipeline (e.g., GitHub Actions, GitLab CI).
+Monetization Strategy
 
-Use environment variables to manage secrets and configuration across environments (e.g., .env.production).
+Palace of Quests earns a 10% commission on each marketplace transaction, creating a steady income stream. To maximize revenue:
 
-
-Security Considerations
-
-1. JWT and Cookie Security: Use httponly and secure flags on cookies to store JWTs, protecting them from JavaScript access and ensuring HTTPS-only transmission.
+1. High-Engagement Quests: Regularly introduce quests with valuable rewards to increase user retention.
 
 
-2. Database Access Restrictions: Limit database access with roles (e.g., gameuser) to prevent unauthorized access.
+2. In-App Purchases: Offer premium items or quest passes to enhance the gaming experience.
 
 
-3. Environment Variables: Keep sensitive keys like PI_API_KEY in environment variables and avoid hardcoding them.
+3. Cross-Promotion: Collaborate with other Web3 and Pi Network-based projects to attract a larger user base.
 
 
-4. Content Security Policy (CSP): Implement CSP headers to restrict content sources, mitigating XSS attacks.
 
 
-5. SSL/TLS: Enforce HTTPS to secure data in transit between clients and servers.
+---
+
+Roadmap
+
+Phase 1: Launch on Pi Network with marketplace and quest functionalities.
+
+Phase 2: Introduce premium quests and in-app purchases.
+
+Phase 3: Implement Ethereum and Bitcoin cross-chain bridges for multi-chain functionality.
 
 
+
+---
 
 Contributing
 
-We welcome contributions to PiQuest! Here’s how to get started:
+We welcome contributions from the community! To contribute:
 
 1. Fork the repository.
 
 
-2. Create a branch for your feature or bugfix: git checkout -b feature-name.
+2. Create a new branch:
+
+git checkout -b feature-name
 
 
-3. Commit your changes and push the branch.
+3. Commit your changes and push to your fork.
 
 
-4. Create a Pull Request to the main branch.
+4. Open a pull request detailing your changes.
 
 
 
-Code Style Guidelines
 
-Python: Follow PEP 8 for Python code style.
-
-JavaScript: Use ESLint recommendations for JavaScript.
-
-SQL: Use uppercase for SQL keywords and lowercase for table/column names.
-
+---
 
 License
 
 This project is licensed under the MIT License. See the LICENSE file for details.
 
 
-
-4. Docker Compose Setup (docker-compose.yml)
-
-Defines services for frontend, backend, and database for easy deployment.
-
-Sets up networked containers for secure, isolated communication between services.
-
-
-
-
-
 ---
 
-Master README File
+This README sets the stage for Palace of Quests to attract developers, contributors, and a broad user base. To really "get this project popping," here are a few next steps:
 
-The root README.md provides high-level installation instructions, including Docker setup, .env configuration, and startup procedures for development and production.
+1. Social Media & Community Building: Start building a presence on Pi Network forums, Twitter, and Discord to attract early users.
+
+
+2. Influencer Collaboration: Partner with influencers in the Pi Network and Web3 spaces to spread the word.
+
+
+3. Engagement Campaigns: Regularly launch new quests, limited-time sales, and events to keep users returning.
