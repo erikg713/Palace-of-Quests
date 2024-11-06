@@ -30,3 +30,24 @@ button {
 button:hover {
   background-color: #5a00d1;
 }
+
+.premium-shop {
+  padding: 1rem;
+  background-color: #f7f7f7;
+}
+
+.premium-shop h2 {
+  color: #6200ee;
+  text-align: center;
+}
+
+.premium-shop ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.premium-shop li {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1rem 0;
