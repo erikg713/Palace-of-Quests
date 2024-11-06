@@ -100,3 +100,61 @@ def complete():
     except Exception as e:
         print(f"Error completing payment: {e}")
         return jsonify({"error": "Failed to complete payment"}), 500
+
+from flask import Blueprint, request, jsonify
+from app.models import PremiumBenefit, User, db
+from app.utils import apply_premium_benefit
+import requests
+import os
+
+premium_bp = Blueprint("premium", __name__)
+
+@premium_bp.route("/benefits", methods=["GET"])
+def get_premium_benefits():
+    benefits = PremiumBenefit.query.all()
+    return jsonify([benefit.to_dict() for benefit in benefits])
+
+@premium_bp.route("/purchase_premium", methods=["POST"])
+def purchase_premium():
+    data = request.get_json()
+    benefit_id = data.get("benefit_id")
+    user_id = data.get("user_id")  # Make sure to retrieve user ID from authenticated session
+
+    benefit = PremiumBenefit.query.get(benefit_id)
+    if not benefit:
+        return jsonify({"error": "Benefit not found"}), 404
+
+    payment_data = {
+        "amount": benefit.price_pi,
+        "memo": f"Purchase of {benefit.name}",
+        "metadata": {"user_id": user_id, "benefit_id": benefit_id}
+    }
+
+    try:
+        response = requests.post("https://api.minepi.com/v2/payments", json=payment_data, headers={
+            "Authorization": f"Bearer {os.getenv('PI_API_KEY')}"
+        })
+        response.raise_for_status()  # Raise an error if request fails
+        return jsonify({"message": "Payment initiated", "payment_data": response.json()})
+    except requests.exceptions.RequestException as e:
+        return jsonify({"error": "Payment initiation failed", "details": str(e)}), 500
+
+@premium_bp.route("/confirm_purchase", methods=["POST"])
+def confirm_purchase():
+    data = request.get_json()
+    payment_id = data.get("payment_id")
+    benefit_id = data.get("benefit_id")
+    user_id = data.get("user_id")
+
+    # Simulate verification - replace with actual Pi Network verification logic
+    payment_verified = verify_payment(payment_id)
+    if payment_verified:
+        apply_premium_benefit(user_id, benefit_id)
+        return jsonify({"message": "Payment confirmed and benefit applied"})
+    else:
+        return jsonify({"error": "Payment verification failed"}), 400
+
+def verify_payment(payment_id):
+    # Placeholder function for actual Pi Network verification logic
+    # Replace this with real Pi Network callback or webhook verification
+    return True
