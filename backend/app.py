@@ -20,3 +20,15 @@ app.register_blueprint(quests_bp, url_prefix='/quests')
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+from dotenv import load_dotenv
+import os
+
+# Load the appropriate .env file
+env_file = '.env.development' if os.getenv("FLASK_ENV") == 'development' else '.env.production'
+load_dotenv(env_file)
+
+# Access variables like this:
+SECRET_KEY = os.getenv("SECRET_KEY")
+DATABASE_URL = os.getenv("DATABASE_URL")
+PI_API_KEY = os.getenv("PI_API_KEY")
