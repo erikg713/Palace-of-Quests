@@ -1,8 +1,8 @@
-        --- README ---
+---
 
-Palace of Quests
+   Palace of Quests-Pi Quest 
 
-Palace of Quests is a decentralized marketplace where users can complete quests, buy and sell digital items, and earn rewards—all on the Pi Network. This Web3-powered platform is designed for secure, cross-chain transactions, and it will soon expand to support Ethereum and Bitcoin networks for seamless multi-chain functionality. With every sale, Palace of Quests takes a 10% profit, enabling you to generate revenue passively.
+Palace of Quests-Pi Quest is a decentralized marketplace where users can complete quests, buy and sell digital items, and earn rewards—all on the Pi Network. This Web3-powered platform is designed for secure, cross-chain transactions, and it will soon expand to support Ethereum and Polygon networks for seamless multi-chain functionality.
 
 
 ---
@@ -42,15 +42,13 @@ Table of Contents
 
 Project Overview
 
-Palace of Quests (a.k.a. PyQuest or Restructure) combines Web3 innovation with marketplace simplicity. Running on the Pi Network, the platform aims to redefine digital economies by enabling decentralized transactions, in-game item trading, and quest-based user engagement. By leveraging Pi Network’s Payment Identifier system, Palace of Quests ensures secure, rapid payments.
+Palace of Quests- Pi Quest combines Web3 innovation with marketplace simplicity. Running on the Pi Network, the platform aims to redefine digital economies by enabling decentralized transactions,cross-chain bridges, in-game item trading, and quest-based user engagement. By leveraging Pi Network’s Payment Identifier system, Palace of Quests ensures secure, rapid payments.
 
 Key Highlights:
 
 Decentralized: Utilizes Pi Network’s blockchain.
 
-Expandable: Plans to integrate with Ethereum and Bitcoin through cross-chain bridges.
-
-Revenue Model: Earns a 10% profit from each marketplace sale.
+Expandable: Plans to integrate with Ethereum and Polygon through cross-chain bridges.
 
 
 
@@ -80,7 +78,7 @@ Backend: Flask for API and server
 
 Database: PostgreSQL for reliable data management
 
-Blockchain Integration: Pi Network for initial launch; planned expansion to Ethereum and Bitcoin
+Blockchain Integration: Pi Network for initial launch; planned expansion to Ethereum and Polygon
 
 Web3 Libraries: Tools for blockchain interactions, like Ethers.js or Web3.js for future bridges
 
@@ -149,7 +147,7 @@ Usage
 
 
 
-Note: Ethereum and Bitcoin support will be introduced in later phases.
+Note: Ethereum and Polygon support will be introduced in later phases.
 
 
 ---
