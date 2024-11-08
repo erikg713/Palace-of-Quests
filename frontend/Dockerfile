@@ -1,11 +1,15 @@
-FROM node:14-alpine
+# React Dockerfile
+FROM node:18-slim
 
-WORKDIR /app
-
-COPY package.json .
+WORKDIR /client
+COPY client/package.json client/package-lock.json ./
 RUN npm install
 
-COPY . .
+COPY client ./
 
-CMD ["npm", "start"]
+# Build the React app
+RUN npm run build
 
+# Serve the app using a lightweight HTTP server
+RUN npm install -g serve
+CMD ["serve", "-s", "build", "-l", "3000"]
