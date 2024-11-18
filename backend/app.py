@@ -1,11 +1,23 @@
+import os
 from flask import Flask
 from flask_jwt_extended import JWTManager
 from flask_sqlalchemy import SQLAlchemy
+from dotenv import load_dotenv
+from config import Config
 from routes.auth import auth_bp
 from routes.marketplace import marketplace_bp
 from routes.quests import quests_bp
-from config import Config
 
+# Load environment variables
+env_file = '.env.development' if os.getenv("FLASK_ENV") == 'development' else '.env.production'
+load_dotenv(env_file)
+
+# Access environment variables
+SECRET_KEY = os.getenv("SECRET_KEY")
+DATABASE_URL = os.getenv("DATABASE_URL")
+PI_API_KEY = os.getenv("PI_API_KEY")
+
+# Initialize Flask app
 app = Flask(__name__)
 app.config.from_object(Config)
 
@@ -18,17 +30,6 @@ app.register_blueprint(auth_bp, url_prefix='/auth')
 app.register_blueprint(marketplace_bp, url_prefix='/marketplace')
 app.register_blueprint(quests_bp, url_prefix='/quests')
 
+# Run the application
 if __name__ == '__main__':
     app.run(debug=True)
-
-from dotenv import load_dotenv
-import os
-
-# Load the appropriate .env file
-env_file = '.env.development' if os.getenv("FLASK_ENV") == 'development' else '.env.production'
-load_dotenv(env_file)
-
-# Access variables like this:
-SECRET_KEY = os.getenv("SECRET_KEY")
-DATABASE_URL = os.getenv("DATABASE_URL")
-PI_API_KEY = os.getenv("PI_API_KEY")
