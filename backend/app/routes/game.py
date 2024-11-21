@@ -1,3 +1,24 @@
+from flask import Blueprint, request, jsonify
+from flask_jwt_extended import jwt_required, get_jwt_identity
+from ..models import User, Level, db
+
+bp = Blueprint("game", __name__, url_prefix="/game")
+
+@bp.route("/progress", methods=["POST"])
+@jwt_required()
+def progress():
+    user_id = get_jwt_identity()
+    data = request.json
+
+    user = User.query.get(user_id)
+    new_level = data.get("level", user.level)
+
+    if new_level > user.level:
+        user.level = new_level
+        user.experience_points += data.get("experience", 0)
+        db.session.commit()
+
+    return jsonify({"message": "Progress updated", "level": user.level}), 200
 from flask import Blueprint, request, jsonify, g
 from app.models import Quest, UserQuest, db
 
