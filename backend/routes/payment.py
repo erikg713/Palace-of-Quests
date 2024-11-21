@@ -1,1 +1,1 @@
-# Payment subscription routes
+# Payment and subscription routes
