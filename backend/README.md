@@ -176,7 +176,25 @@ git checkout -b feature/your-feature
 4. Open a pull request.
 
 
-
+palace_of_quests/
+├── app/
+│   ├── __init__.py
+│   ├── models.py        # Database models
+│   ├── routes/
+│   │   ├── __init__.py
+│   │   ├── auth.py       # Authentication routes
+│   │   ├── game.py       # Game-related routes
+│   │   ├── payment.py    # Payment and subscription routes
+│   ├── utils/
+│   │   ├── __init__.py
+│   │   ├── security.py   # Password hashing and JWT helpers
+│   │   ├── helpers.py    # General helper functions
+├── migrations/           # Database migrations
+├── tests/                # Unit tests
+├── .env                  # Environment variables
+├── config.py             # Configuration settings
+├── requirements.txt      # Python dependencies
+└── wsgi.py               # Entry point for the application
 
 ---
 
