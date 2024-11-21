@@ -1,1 +1,1 @@
-a
+# Game-related routes
