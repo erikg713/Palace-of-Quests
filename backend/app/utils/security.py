@@ -1,3 +1,4 @@
+# Password hashing and JWT helpers
 import jwt
 from datetime import datetime, timedelta
 from flask import request, jsonify
