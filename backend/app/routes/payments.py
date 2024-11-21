@@ -1,3 +1,72 @@
+from flask import Blueprint, request, jsonify
+from flask_jwt_extended import jwt_required, get_jwt_identity
+from ..models import Subscription, User, db
+from ..utils.pi_network import create_payment, verify_payment
+from datetime import datetime, timedelta
+
+bp = Blueprint("payment", __name__, url_prefix="/payment")
+
+@bp.route("/subscribe", methods=["POST"])
+@jwt_required()
+def subscribe():
+    user_id = get_jwt_identity()
+    user = User.query.get(user_id)
+
+    if not user:
+        return jsonify({"error": "User not found"}), 404
+
+    try:
+        # Initiate payment
+        payment_response = create_payment(
+            user_uid=user_id,
+            amount=9.99,  # Premium subscription cost
+            metadata={"type": "subscription", "username": user.username}
+        )
+
+        payment_id = payment_response.get("payment_id")
+        # Save subscription details
+        subscription = Subscription(
+            user_id=user_id,
+            subscription_type="Premium",
+            start_date=datetime.utcnow(),
+            end_date=datetime.utcnow() + timedelta(days=365),
+            amount_paid=9.99,
+            payment_status="Pending"
+        )
+        db.session.add(subscription)
+        db.session.commit()
+
+        return jsonify({
+            "message": "Subscription initiated. Complete payment via Pi Network app.",
+            "payment_id": payment_id,
+        }), 201
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@bp.route("/verify", methods=["POST"])
+@jwt_required()
+def verify_subscription():
+    data = request.json
+    payment_id = data.get("payment_id")
+
+    try:
+        # Verify payment status
+        payment_status = verify_payment(payment_id)
+
+        if payment_status.get("status") == "completed":
+            # Update subscription status
+            subscription = Subscription.query.filter_by(payment_id=payment_id).first()
+            if subscription:
+                subscription.payment_status = "Completed"
+                db.session.commit()
+
+            return jsonify({"message": "Payment verified and subscription activated."}), 200
+        else:
+            return jsonify({"error": "Payment is not yet completed."}), 400
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 from flask import Blueprint, jsonify
 
 bp = Blueprint("payment", __name__, url_prefix="/payment")
