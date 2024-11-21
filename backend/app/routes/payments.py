@@ -1,3 +1,11 @@
+from flask import Blueprint, jsonify
+
+bp = Blueprint("payment", __name__, url_prefix="/payment")
+
+@bp.route("/subscribe", methods=["POST"])
+def subscribe():
+    # Pi Network integration logic here
+    return jsonify({"message": "Subscription processed"}), 200
 from flask import Blueprint, request, jsonify
 from app.utils.piAPI import approve_payment, complete_payment
 
