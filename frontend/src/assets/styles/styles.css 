@@ -1,31 +1,58 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
+button:hover {
+  background-color: #45a049;
+}
+
+.auth-container, .dashboard, .shop, .subscription {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f4f4f4;
+  border-radius: 8px;
+}
+
+h2, h3 {
+  color: #333;
+}
+
+.progress-container {
+  width: 100%;
+  background-color: #e0e0e0;
+  border-radius: 10px;
+  margin: 10px 0;
+}
+
+.progress-bar {
+  height: 20px;
+  background-color: #4CAF50;
+  border-radius: 10px;
+}
+
+ul {
+  list-style-type: none;
   padding: 0;
 }
 
-.navbar {
-  background-color: #333;
+li {
+  margin-bottom: 15px;
   padding: 10px;
-  color: white;
+  background-color: #fff;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.navbar ul {
-  list-style-type: none;
-  display: flex;
-  gap: 20px;
+input {
+  padding: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid #ddd;
 }
 
-.navbar li {
-  margin-right: 20px;
+input:focus {
+  border-color: #4CAF50;
 }
 
-button {
-  padding: 10px 20px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  cursor: pointer;
+.error-message {
+  color: red;
+  font-size: 14px;
 }
-
-button:hover
