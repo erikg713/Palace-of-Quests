@@ -1,3 +1,19 @@
+import React from 'react';
+import LevelProgression from './LevelProgression';
+import Shop from './Shop';
+
+const Dashboard = ({ player }) => {
+  return (
+    <div>
+      <h1>Welcome, {player.name}</h1>
+      <LevelProgression level={player.level} experience={player.experience} />
+      <Shop />
+    </div>
+  );
+};
+
+export default Dashboard;
+
 import React, { useState } from "react";
 import { initiateSubscription } from "../utils/piNetwork";
 
