@@ -17,3 +17,50 @@ const Subscription = () => {
 };
 
 export default Subscription;
+import React, { useState, useEffect } from 'react';
+import { getSubscriptionStatus, subscribe } from '../../services/payment';
+
+const Subscription = () => {
+  const [subscriptionStatus, setSubscriptionStatus] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchSubscriptionStatus = async () => {
+      const status = await getSubscriptionStatus();
+      setSubscriptionStatus(status);
+      setLoading(false);
+    };
+
+    fetchSubscriptionStatus();
+  }, []);
+
+  const handleSubscription = async () => {
+    try {
+      await subscribe();
+      alert('Subscription activated!');
+    } catch (error) {
+      alert('Subscription failed! Please try again.');
+    }
+  };
+
+  if (loading) {
+    return <div>Loading subscription status...</div>;
+  }
+
+  return (
+    <div className="subscription">
+      <h2>Premium Subscription</h2>
+      {subscriptionStatus ? (
+        <div>
+          <p>Your subscription is active until {subscriptionStatus.expiryDate}.</p>
+        </div>
+      ) : (
+        <div>
+          <button onClick={handleSubscription}>Activate Premium</button>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Subscription;
