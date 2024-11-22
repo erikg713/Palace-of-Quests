@@ -14,3 +14,33 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+import React, { useEffect, useState } from 'react';
+import { getPlayerData } from '../../services/api';
+
+const Dashboard = () => {
+  const [playerData, setPlayerData] = useState(null);
+
+  useEffect(() => {
+    const fetchPlayerData = async () => {
+      const data = await getPlayerData();
+      setPlayerData(data);
+    };
+
+    fetchPlayerData();
+  }, []);
+
+  if (!playerData) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <div className="dashboard">
+      <h2>Welcome, {playerData.username}!</h2>
+      <p>Level: {playerData.level}</p>
+      <p>XP: {playerData.xp}</p>
+      <p>Pi Wallet: {playerData.piBalance} Pi</p>
+    </div>
+  );
+};
+
+export default Dashboard;
