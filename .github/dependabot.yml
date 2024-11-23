@@ -4,29 +4,29 @@ updates:
   - package-ecosystem: "pip"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "dialy"
     open-pull-requests-limit: 5
 
   # Node.js dependencies (React frontend)
   - package-ecosystem: "npm"
     directory: "/client"
     schedule:
-      interval: "weekly"
+      interval: "daily"
     open-pull-requests-limit: 5
 
   # Docker dependencies
   - package-ecosystem: "docker"
     directory: "/"
     schedule:
-      interval: "weekly"
-    open-pull-requests-limit: 3
+      interval: "daily"
+    open-pull-requests-limit: 5
 
   # GitHub Actions dependencies in .github directory
   - package-ecosystem: "github-actions"
     directory: "/.github"
     schedule:
-      interval: "weekly"
-    open-pull-requests-limit: 3
+      interval: "daily"
+    open-pull-requests-limit: 5
     commit-message:
       prefix: "chore"
 
@@ -34,5 +34,5 @@ updates:
   - package-ecosystem: "gitsubmodule"
     directory: "/"
     schedule:
-      interval: "weekly"
-    open-pull-requests-limit: 3
+      interval: "daily"
+    open-pull-requests-limit: 5
