@@ -1,1 +1,1 @@
-# Item Detail View 
+# Item detail view
