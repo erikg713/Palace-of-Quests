@@ -30,7 +30,7 @@ jobs:
           context: .
           file: Dockerfile
           tags: ${{ secrets.DOCKER_USERNAME }}/palace_of_quests_backend:latest
-          push: true
+          push: false
 
       - name: Build and push frontend image
         uses: docker/build-push-action@v4
@@ -38,13 +38,13 @@ jobs:
           context: .
           file: client/Dockerfile
           tags: ${{ secrets.DOCKER_USERNAME }}/palace_of_quests_frontend:latest
-          push: true
+          push: false
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to Production (DigitalOcean, AWS, etc.)
-        run: |
+        run: docker compose up
           # This step would contain deployment commands
           # For example, use `docker compose up` on a remote server or deploy to a Kubernetes cluster
