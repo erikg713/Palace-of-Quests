@@ -1,3 +1,14 @@
+import React from "react";
+import ReactDOM from "react-dom";
+import PalaceOfQuests from "./App";
+
+ReactDOM.render(
+  <React.StrictMode>
+    <PalaceOfQuests />
+  </React.StrictMode>,
+  document.getElementById("root")
+);
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './assets/styles/styles.css';
