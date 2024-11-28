@@ -1,118 +1,69 @@
-Palace of Quests
+# Palace of Quests (Pi Quest)
 
-Palace of Quests is a Web3-based metaverse and marketplace built on the Pi Network. The platform integrates blockchain for secure payments, user authentication, and a gamified experience. The app features a marketplace for digital goods, quests, and interactions with the Pi Network. The future will bring additional multi-chain support (Ethereum, Polygon, Bitcoin) through cross-chain bridges.
+**Palace of Quests (Pi Quest)** is a Web3-powered metaverse game built on the Pi Network. This engaging platform offers players the chance to explore, level up, and earn rewards in an immersive virtual world. Designed with scalability, security, and innovation in mind, the game incorporates blockchain technology, decentralized transactions, and a tiered subscription model for premium features.
 
+## 🚀 Features
 
----
+- **Metaverse Gameplay**: Engage in a dynamic world with levels ranging from 1 to 250.
+- **Rewards and Experience**: Gain in-game rewards and experience points to unlock avatar upgrades.
+- **Premium Subscription**: Enjoy all unlocked upgrades with a $9.99/year subscription.
+- **Blockchain Integration**: Seamlessly integrated with the Pi Network SDK (U2A) for secure peer-to-peer payments.
+- **Cross-Chain Compatibility**: Planned integration with Ethereum and Tide networks for cross-chain bridging.
+- **Database**: Powered by PostgreSQL for reliable data storage and management.
+- **Clean Codebase**: Secure, structured backend and frontend for scalability and maintainability.
 
-Features
+## 🛠️ Tech Stack
 
-Marketplace: A platform where users can buy and sell digital assets using Pi coins, with plans to integrate Ethereum, Polygon, and Bitcoin.
+### **Frontend**
+- **React**: Interactive and scalable user interfaces.
+- **React Native** *(Future Plan)*: Mobile-first design for cross-platform support.
 
-Gamified Quests: Users can embark on quests to earn rewards.
+### **Backend**
+- **Flask**: Lightweight and secure backend framework.
+- **PostgreSQL**: Database for storing user progress, game data, and transactions.
 
-Pi Network Payment Integration: Handles secure transactions and user login through Pi coins.
+### **Blockchain**
+- **Pi Network**: Primary payment system with Pi coin integration.
+- **Ethereum**: Planned cross-chain functionality.
 
-Cross-Chain Bridges: Future plans for integrating Ethereum, Polygon, and Bitcoin for broader payment options.
+### **Additional Tools**
+- **JWT**: Secure user authentication.
+- **Docker**: Containerization for consistent environments.
 
-Web3 Metaverse: A digital world that integrates blockchain and virtual experiences.
+## 📖 How It Works
 
-Backend with Flask and PostgreSQL: Scalable architecture with a secure database setup.
+1. **Create an Account**: Sign up using your Pi Network credentials.
+2. **Start Your Quest**: Begin at level 1 and complete challenges to gain rewards.
+3. **Upgrade Your Avatar**: Use earned rewards to enhance your avatar's capabilities.
+4. **Go Premium**: Unlock all upgrades with a $9.99 yearly subscription.
+5. **Transact Securely**: Utilize the Pi Network SDK for safe, peer-to-peer payments.
 
-Dockerized Deployment: Simplified containerization for both frontend and backend services.
+## 🔑 Key Highlights
 
+- **Decentralized Transactions**: Fully integrated blockchain payments.
+- **Rewarding Gameplay**: Unique experience for each player with growth opportunities.
+- **Future-Ready**: Cross-chain capabilities with Ethereum and Tide Network.
 
+## 📂 Project Structure
 
----
+Palace-of-Quests/ ├── backend/ │   ├── app/ │   │   ├── config.py │   │   ├── models/ │   │   ├── routes/ │   │   └── services/ │   ├── requirements.txt │   └── wsgi.py ├── frontend/ │   ├── src/ │   │   ├── components/ │   │   ├── pages/ │   │   └── utils/ │   ├── public/ │   └── package.json └── README.md
 
-Project Structure
+## 📦 Installation
 
-The project consists of two main components:
+### **Prerequisites**
+- Python 3.10+
+- Node.js 18+
+- PostgreSQL 15+
+- Docker (optional)
 
-1. Frontend (React)
-
-Built with React for dynamic, responsive UI.
-
-Integrates Pi Network SDK for Pi coin authentication and payments.
-
-Uses environment variables to differentiate between development, staging, and production environments.
-
-Docker-ready for containerized deployments.
-
-
-2. Backend (Flask)
-
-Flask serves as the backend framework for handling API requests.
-
-PostgreSQL is used for managing user data, transactions, and marketplace items.
-
-The backend integrates the Pi Network SDK for secure Pi coin transactions.
-
-The backend is also Dockerized for easy deployment.
-
-
-
----
-
-Setup
-
-Prerequisites
-
-Node.js (v16+ recommended) for the frontend.
-
-Python 3.9+ for the backend.
-
-PostgreSQL database instance for the backend.
-
-Docker (optional but recommended).
-
-Pi Network App Credentials from the Pi Developer Portal.
-
-
-
----
-
-Installation
-
-1. Frontend Setup
-
+### **Backend Setup**
 1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/palace-of-quests.git
 
-git clone https://github.com/your-repo/palace-of-quests-frontend.git
-cd palace-of-quests-frontend
+2. Navigate to the backend directory:
 
-
-2. Install dependencies:
-
-npm install
-
-
-3. Set up the .env file with Pi Network credentials and backend URL:
-
-REACT_APP_BACKEND_URL=http://localhost:5000
-REACT_APP_PI_APP_ID=your_pi_app_id
-REACT_APP_PI_API_KEY=your_pi_api_key
-REACT_APP_PI_ENV=development
-
-
-4. Start the development server:
-
-npm start
-
-
-
-2. Backend Setup
-
-1. Clone the repository:
-
-git clone https://github.com/your-repo/palace-of-quests-backend.git
-cd palace-of-quests-backend
-
-
-2. Set up a virtual environment:
-
-python3 -m venv venv
-source venv/bin/activate  # On Windows, use venv\Scripts\activate
+cd palace-of-quests/backend
 
 
 3. Install dependencies:
@@ -120,121 +71,90 @@ source venv/bin/activate  # On Windows, use venv\Scripts\activate
 pip install -r requirements.txt
 
 
-4. Configure the .env file with the required keys:
-
-FLASK_APP=app.py
-FLASK_ENV=development
-DATABASE_URL=postgresql://user:password@localhost:5432/palace_of_quests
-PI_APP_ID=your_pi_app_id
-PI_API_KEY=your_pi_api_key
-
-
-5. Run migrations for PostgreSQL:
-
-flask db upgrade
-
-
-6. Start the backend server:
+4. Run the development server:
 
 flask run
 
 
 
-3. Docker Setup (Optional)
+Frontend Setup
 
-1. Build the Docker images for both frontend and backend:
+1. Navigate to the frontend directory:
 
-docker build -t palace-of-quests-frontend ./frontend
-docker build -t palace-of-quests-backend ./backend
-
-
-2. Run the containers:
-
-docker run -p 3000:3000 palace-of-quests-frontend
-docker run -p 5000:5000 palace-of-quests-backend
+cd palace-of-quests/frontend
 
 
+2. Install dependencies:
+
+npm install
 
 
----
+3. Start the React app:
 
-API Endpoints
-
-Authentication
-
-POST /auth/register: Register a new user.
-
-POST /auth/login: Authenticate the user and receive a JWT token.
-
-
-Payments
-
-POST /payment/initiate: Initiate a Pi coin transaction.
-
-POST /payment/complete: Complete the Pi coin transaction.
-
-
-Marketplace
-
-GET /marketplace: Retrieve a list of marketplace items.
-
-POST /marketplace: Add a new item to the marketplace.
-
-
-Quests
-
-GET /quests: Retrieve available quests.
-
-POST /quests: Create a new quest.
+npm start
 
 
 
----
+Using Docker
 
-Deployment
+1. Build the Docker image:
 
-Hosting
-
-This backend and frontend can be deployed on popular hosting services like:
-
-AWS EC2, Heroku, DigitalOcean, Netlify (for frontend).
-
-PostgreSQL can be hosted on platforms like ElephantSQL or AWS RDS.
+docker-compose build
 
 
-Make sure to configure environment variables on your hosting platform to match the local .env files.
+2. Run the application:
+
+docker-compose up
 
 
----
 
-Contributing
+📅 Roadmap
 
-We welcome contributions! To contribute:
+[ ] Launch MVP with Pi Network payment integration.
+
+[ ] Expand levels and features in the metaverse.
+
+[ ] Add React Native for mobile platforms.
+
+[ ] Integrate cross-chain functionality with Ethereum.
+
+
+🤝 Contributing
+
+Contributions are welcome! Please follow these steps:
 
 1. Fork the repository.
 
 
-2. Create a new feature branch:
+2. Create a feature branch:
 
-git checkout -b feature/your-feature
-
-
-3. Commit your changes and push to the branch.
+git checkout -b feature-name
 
 
-4. Open a pull request.
+3. Commit your changes:
+
+git commit -m "Add feature-name"
+
+
+4. Push to your branch:
+
+git push origin feature-name
+
+
+5. Open a Pull Request.
 
 
 
+🛡️ License
 
----
+This project is licensed under the MIT License. See the LICENSE file for details.
 
-License
+📧 Contact
 
-This project is licensed under the MIT License. See the LICENSE file for more details.
+For questions or support, please email: your-email@example.com
 
-
----
-
-Let me know if you need any other details or specific adjustments!
+### Customize
+- Replace placeholders like `your-username` and `your-email@example.com` with your details.
+- Add badges (e.g., build status, license) if applicable.
+- Update any specific project links or information.
 
