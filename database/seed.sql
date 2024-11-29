@@ -116,3 +116,11 @@ END$$
 DELIMITER ;
 CALL GenerateRewards(100); -- Generate 100 levels dynamically
 SELECT * FROM level_rewards;
+-- Check users
+SELECT * FROM users;
+
+-- Check level rewards
+SELECT * FROM level_rewards;
+
+-- Check user rewards
+SELECT * FROM user_rewards;
