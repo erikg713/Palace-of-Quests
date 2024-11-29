@@ -120,3 +120,56 @@ def test_invalid_price(client, auth_headers):
     response = client.post('/marketplace/items', json=item_data, headers=auth_headers)
     assert response.status_code == 400
     assert 'Price must be greater than zero' in response.json['errors']['price']
+def test_large_price_value(client, auth_headers):
+    """Test adding an item with a very large price."""
+    item_data = {
+        'name': 'Expensive Item',
+        'description': 'This item is extremely expensive.',
+        'price': 1e9  # 1 billion
+    }
+    response = client.post('/marketplace/items', json=item_data, headers=auth_headers)
+    assert response.status_code == 400
+    assert 'Price must be between 0 and 10,000' in response.json['errors']['price']
+    def test_empty_fields(client, auth_headers):
+    """Test adding an item with empty required fields."""
+    item_data = {
+        'name': '',
+        'description': '',
+        'price': ''
+    }
+    response = client.post('/marketplace/items', json=item_data, headers=auth_headers)
+    assert response.status_code == 400
+    assert 'Name is required' in response.json['errors']['name']
+    assert 'Description is required' in response.json['errors']['description']
+    assert 'Price is required' in response.json['errors']['price']
+    def test_unauthorized_update(client, auth_headers):
+    """Test updating an item that belongs to another user."""
+    # Create an item for another user
+    other_item = MarketplaceItem(name='Other User Item', description='Not yours.', price=20.0, seller_id=2)
+    db.session.add(other_item)
+    db.session.commit()
+
+    update_data = {'name': 'Updated Name'}
+    response = client.put(f'/marketplace/items/{other_item.id}', json=update_data, headers=auth_headers)
+    assert response.status_code == 403
+    assert response.json['error'] == 'Unauthorized action'
+
+def test_unauthorized_delete(client, auth_headers):
+    """Test deleting an item that belongs to another user."""
+    # Create an item for another user
+    other_item = MarketplaceItem(name='Other User Item', description='Not yours.', price=20.0, seller_id=2)
+    db.session.add(other_item)
+    db.session.commit()
+
+    response = client.delete(f'/marketplace/items/{other_item.id}', headers=auth_headers)
+    assert response.status_code == 403
+    assert response.json['error'] == 'Unauthorized action'
+    @pytest.fixture(autouse=True)
+def setup_and_teardown():
+    """Clear database before each test."""
+    db.session.query(MarketplaceItem).delete()
+    db.session.commit()
+    yield
+    db.session.query(MarketplaceItem).delete()
+    db.session.commit()
+    
