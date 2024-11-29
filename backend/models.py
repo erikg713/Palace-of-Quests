@@ -1,4 +1,28 @@
 # Database models
+from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
+import uuid
+
+db = SQLAlchemy()
+
+class User(db.Model):
+    __tablename__ = 'users'
+
+    id = db.Column(db.String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    uid = db.Column(db.String, unique=True, nullable=False)
+    username = db.Column(db.String, nullable=True)
+    email = db.Column(db.String, nullable=True)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+class UserProgress(db.Model):
+    __tablename__ = 'user_progress'
+
+    id = db.Column(db.String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    user_id = db.Column(db.String, db.ForeignKey('users.id'), nullable=False)
+    level = db.Column(db.Integer, default=1)
+    experience_points = db.Column(db.Integer, default=0)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 from database import db
 from datetime import datetime
 
