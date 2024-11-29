@@ -1,1 +1,90 @@
-@
+import pytest
+from app import create_app, db
+from app.models import MarketplaceItem, User
+
+@pytest.fixture
+def app():
+    """Set up Flask application for testing."""
+    app = create_app('testing')  # Use a testing config
+    with app.app_context():
+        db.create_all()
+        yield app
+        db.session.remove()
+        db.drop_all()
+
+@pytest.fixture
+def client(app):
+    """Set up Flask test client."""
+    return app.test_client()
+
+@pytest.fixture
+def auth_headers(client):
+    """Helper fixture to create a user and generate a JWT token."""
+    user_data = {'username': 'testuser', 'password': 'password123'}
+    client.post('/auth/register', json=user_data)
+    response = client.post('/auth/login', json=user_data)
+    token = response.json['access_token']
+    return {'Authorization': f'Bearer {token}'}
+
+def test_get_items_empty(client):
+    """Test fetching items when the database is empty."""
+    response = client.get('/marketplace/items')
+    assert response.status_code == 200
+    assert response.json == []
+
+def test_add_item(client, auth_headers):
+    """Test adding a new marketplace item."""
+    item_data = {
+        'name': 'Test Item',
+        'description': 'This is a test item.',
+        'price': 100.0
+    }
+    response = client.post('/marketplace/items', json=item_data, headers=auth_headers)
+    assert response.status_code == 201
+    assert response.json['message'] == 'Item added successfully'
+
+def test_add_item_missing_fields(client, auth_headers):
+    """Test adding an item with missing fields."""
+    item_data = {
+        'name': 'Test Item',
+        'price': 100.0
+    }
+    response = client.post('/marketplace/items', json=item_data, headers=auth_headers)
+    assert response.status_code == 400
+    assert 'description' in response.json['errors']
+
+def test_update_item(client, auth_headers):
+    """Test updating an existing item."""
+    # Create an item
+    item = MarketplaceItem(name='Old Item', description='Old description', price=50.0, seller_id=1)
+    db.session.add(item)
+    db.session.commit()
+
+    update_data = {'name': 'Updated Item', 'price': 75.0}
+    response = client.put(f'/marketplace/items/{item.id}', json=update_data, headers=auth_headers)
+    assert response.status_code == 200
+    assert response.json['message'] == 'Item updated successfully'
+
+def test_update_item_not_found(client, auth_headers):
+    """Test updating a non-existent item."""
+    update_data = {'name': 'Non-existent Item', 'price': 75.0}
+    response = client.put('/marketplace/items/999', json=update_data, headers=auth_headers)
+    assert response.status_code == 404
+    assert response.json['error'] == 'Item not found'
+
+def test_delete_item(client, auth_headers):
+    """Test deleting an existing item."""
+    # Create an item
+    item = MarketplaceItem(name='Item to delete', description='To be deleted', price=10.0, seller_id=1)
+    db.session.add(item)
+    db.session.commit()
+
+    response = client.delete(f'/marketplace/items/{item.id}', headers=auth_headers)
+    assert response.status_code == 200
+    assert response.json['message'] == 'Item deleted successfully'
+
+def test_delete_item_not_found(client, auth_headers):
+    """Test deleting a non-existent item."""
+    response = client.delete('/marketplace/items/999', headers=auth_headers)
+    assert response.status_code == 404
+    assert response.json['error'] == 'Item not found'
