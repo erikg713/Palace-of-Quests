@@ -1,11 +1,10 @@
-# Entry point for the application
-from app import create_app
+# WSGI configuration for Palace of Quests on PythonAnywhere
 
-app = create_app()
-
-if __name__ == "__main__":
-    app.run(debug=True)
 import sys
+
+# Add the project directory to the system path
 sys.path.insert(0, '/home/Dev713/PalaceOfQuests')
 
-from app import app as application  # Replace 'app' with your Flask app file name.
+# Import the application factory and create the app
+from app import create_app
+application = create_app()  # Flask expects `application` as the callable
