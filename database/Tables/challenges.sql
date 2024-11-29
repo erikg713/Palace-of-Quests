@@ -7,3 +7,7 @@ CREATE TABLE challenges (
     difficulty_level INT, -- 1-10 scale
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+INSERT INTO challenges (challenge_name, description, total_steps, reward)
+VALUES
+    ('Sword Training', 'Complete 100 sword swings.', 100, 500.0),
+    ('Shield Mastery', 'Block 50 attacks.', 50, 300.0);
