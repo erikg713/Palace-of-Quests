@@ -18,20 +18,22 @@ def add_item():
     current_user = get_jwt_identity()
     data = request.json
 
+    if not data or not all(k in data for k in ('name', 'description', 'price')):
+        return jsonify({'error': 'Missing required fields'}), 400
+
     try:
         new_item = MarketplaceItem(
             name=data['name'],
             description=data['description'],
-            price=data['price'],
+            price=float(data['price']),
             seller_id=current_user
         )
         db.session.add(new_item)
         db.session.commit()
         return jsonify({'message': 'Item added successfully'}), 201
-    except KeyError as e:
-        return jsonify({'error': f'Missing field: {str(e)}'}), 400
     except Exception as e:
-        return jsonify({'error': 'Something went wrong'}), 500
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
 
 # Route to update an item
 @marketplace_bp.route('/items/<int:item_id>', methods=['PUT'])
@@ -54,7 +56,8 @@ def update_item(item_id):
         db.session.commit()
         return jsonify({'message': 'Item updated successfully'}), 200
     except Exception as e:
-        return jsonify({'error': 'Something went wrong'}), 500
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
 
 # Route to delete an item
 @marketplace_bp.route('/items/<int:item_id>', methods=['DELETE'])
@@ -74,16 +77,5 @@ def delete_item(item_id):
         db.session.commit()
         return jsonify({'message': 'Item deleted successfully'}), 200
     except Exception as e:
-        return jsonify({'error': 'Something went wrong'}), 500
-        @marketplace_bp.route('/api/marketplace/list', methods=['POST'])
-def list_item():
-    data = request.json
-    user_id = data['user_id']
-    item_name = data['item_name']
-    price = data['price']
-
-    new_item = MarketplaceItem(user_id=user_id, item_name=item_name, price=price)
-    db.session.add(new_item)
-    db.session.commit()
-
-    return jsonify({"message": "Item listed successfully"})
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
