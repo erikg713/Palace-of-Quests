@@ -88,3 +88,35 @@ def test_delete_item_not_found(client, auth_headers):
     response = client.delete('/marketplace/items/999', headers=auth_headers)
     assert response.status_code == 404
     assert response.json['error'] == 'Item not found'
+def test_invalid_name(client, auth_headers):
+    """Test adding an item with an invalid name."""
+    item_data = {
+        'name': 'a',
+        'description': 'This is valid.',
+        'price': 100.0
+    }
+    response = client.post('/marketplace/items', json=item_data, headers=auth_headers)
+    assert response.status_code == 400
+    assert 'Name must be at least 3 characters long' in response.json['errors']['name']
+
+def test_invalid_description(client, auth_headers):
+    """Test adding an item with an overly long description."""
+    item_data = {
+        'name': 'Valid Name',
+        'description': 'x' * 201,  # 201 characters
+        'price': 100.0
+    }
+    response = client.post('/marketplace/items', json=item_data, headers=auth_headers)
+    assert response.status_code == 400
+    assert 'Description must be 200 characters or less' in response.json['errors']['description']
+
+def test_invalid_price(client, auth_headers):
+    """Test adding an item with a price of zero."""
+    item_data = {
+        'name': 'Valid Name',
+        'description': 'Valid description.',
+        'price': 0
+    }
+    response = client.post('/marketplace/items', json=item_data, headers=auth_headers)
+    assert response.status_code == 400
+    assert 'Price must be greater than zero' in response.json['errors']['price']
