@@ -109,3 +109,58 @@ LEFT JOIN level_rewards lr ON ur.level_id = lr.level_id
 WHERE ur.claimed_at IS NOT NULL
 GROUP BY u.id
 ORDER BY total_claimed_rewards DESC;
+SELECT 
+    lr.level_name AS level_name,
+    lr.reward_type AS reward_type,
+    COUNT(ur.id) AS total_claims,
+    COALESCE(SUM(lr.reward_amount), 0) AS total_reward_distributed
+FROM level_rewards lr
+LEFT JOIN user_rewards ur ON lr.level_id = ur.level_id
+WHERE ur.claimed_at IS NOT NULL
+GROUP BY lr.level_id
+ORDER BY total_claims DESC;
+SELECT 
+    COUNT(ur.id) AS total_claims,
+    COALESCE(SUM(lr.reward_amount), 0) AS total_rewards_distributed,
+    AVG(lr.reward_amount) AS average_reward_value
+FROM user_rewards ur
+INNER JOIN level_rewards lr ON ur.level_id = lr.level_id
+WHERE ur.claimed_at IS NOT NULL;
+SELECT 
+    u.username AS user_name,
+    u.email AS user_email
+FROM users u
+LEFT JOIN user_rewards ur ON u.id = ur.user_id AND ur.claimed_at IS NOT NULL
+WHERE ur.id IS NULL;
+SELECT 
+    lr.reward_type AS reward_type,
+    COUNT(ur.id) AS total_claims,
+    COALESCE(SUM(lr.reward_amount), 0) AS total_rewards
+FROM level_rewards lr
+LEFT JOIN user_rewards ur ON lr.level_id = ur.level_id
+WHERE ur.claimed_at IS NOT NULL
+GROUP BY lr.reward_type
+ORDER BY total_rewards DESC;
+SELECT 
+    lr.level_name AS level_name,
+    COUNT(ur.id) AS total_claims
+FROM level_rewards lr
+LEFT JOIN user_rewards ur ON lr.level_id = ur.level_id
+WHERE ur.claimed_at IS NOT NULL
+GROUP BY lr.level_id
+ORDER BY total_claims DESC
+LIMIT 5;
+SELECT 
+    AVG(total_rewards) AS avg_rewards_per_user,
+    AVG(total_claimed) AS avg_claims_per_user
+FROM (
+    SELECT 
+        u.id AS user_id,
+        COALESCE(SUM(lr.reward_amount), 0) AS total_rewards,
+        COUNT(ur.id) AS total_claimed
+    FROM users u
+    LEFT JOIN user_rewards ur ON u.id = ur.user_id
+    LEFT JOIN level_rewards lr ON ur.level_id = lr.level_id
+    WHERE ur.claimed_at IS NOT NULL
+    GROUP BY u.id
+) user_summary;
