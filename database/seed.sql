@@ -99,3 +99,13 @@ def main():
 
 if __name__ == "__main__":
     main()
+SELECT 
+    u.username AS user_name,
+    COUNT(ur.id) AS total_claimed_rewards,
+    COALESCE(SUM(lr.reward_amount), 0) AS total_reward_value
+FROM users u
+LEFT JOIN user_rewards ur ON u.id = ur.user_id
+LEFT JOIN level_rewards lr ON ur.level_id = lr.level_id
+WHERE ur.claimed_at IS NOT NULL
+GROUP BY u.id
+ORDER BY total_claimed_rewards DESC;
