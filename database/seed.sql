@@ -1,126 +1,101 @@
--- Drop existing data and reset tables
-DELETE FROM user_rewards;
-DELETE FROM level_rewards;
-DELETE FROM users;
+import random
+from faker import Faker
+from sqlalchemy import create_engine, Table, Column, Integer, String, Float, DateTime, MetaData, ForeignKey, func
+from sqlalchemy.orm import sessionmaker
+from datetime import datetime
 
--- Reset auto-increment counters
-ALTER TABLE users AUTO_INCREMENT = 1;
-ALTER TABLE level_rewards AUTO_INCREMENT = 1;
-ALTER TABLE user_rewards AUTO_INCREMENT = 1;
+# Initialize Faker and database connection
+faker = Faker()
+engine = create_engine("mysql+pymysql://username:password@localhost/database_name")
+Session = sessionmaker(bind=engine)
+session = Session()
+metadata = MetaData()
 
--- Seed data for users
-INSERT INTO users (username, email, password, created_at)
-VALUES 
-('player1', 'player1@example.com', 'password123', NOW()),
-('player2', 'player2@example.com', 'password123', NOW()),
-('player3', 'player3@example.com', 'password123', NOW());
+# Define tables
+users = Table(
+    'users', metadata,
+    Column('id', Integer, primary_key=True),
+    Column('username', String(100), nullable=False),
+    Column('email', String(200), nullable=False),
+    Column('password', String(100), nullable=False),
+    Column('created_at', DateTime, default=datetime.utcnow),
+)
 
--- Seed data for level_rewards
-INSERT INTO level_rewards (level_name, reward_type, reward_amount, created_at)
-VALUES
-('Level 1', 'Coins', 100, NOW()),
-('Level 2', 'Coins', 200, NOW()),
-('Level 3', 'Item', 1, NOW()),
-('Level 4', 'Gems', 50, NOW()),
-('Level 5', 'Bonus', 1, NOW());
+level_rewards = Table(
+    'level_rewards', metadata,
+    Column('level_id', Integer, primary_key=True),
+    Column('level_name', String(100), nullable=False),
+    Column('reward_type', String(50), nullable=False),
+    Column('reward_amount', Float, nullable=False),
+    Column('created_at', DateTime, default=datetime.utcnow),
+)
 
--- Seed data for user_rewards
-INSERT INTO user_rewards (user_id, level_id, claimed_at)
-VALUES
-(1, 1, NOW()), -- Player 1 claimed Level 1 reward
-(2, 1, NOW()), -- Player 2 claimed Level 1 reward
-(2, 2, NULL),  -- Player 2 has not yet claimed Level 2 reward
-(3, 3, NOW()); -- Player 3 claimed Level 3 reward
+user_rewards = Table(
+    'user_rewards', metadata,
+    Column('id', Integer, primary_key=True),
+    Column('user_id', Integer, ForeignKey('users.id'), nullable=False),
+    Column('level_id', Integer, ForeignKey('level_rewards.level_id'), nullable=False),
+    Column('claimed_at', DateTime, nullable=True),
+)
 
--- Optional: View seeded data
-SELECT * FROM users;
-SELECT * FROM level_rewards;
-SELECT * FROM user_rewards;
--- Clear existing data and reset tables
-DELETE FROM user_rewards;
-DELETE FROM level_rewards;
-DELETE FROM users;
+# Create tables if they don't exist
+metadata.create_all(engine)
 
--- Reset auto-increment counters
-ALTER TABLE users AUTO_INCREMENT = 1;
-ALTER TABLE level_rewards AUTO_INCREMENT = 1;
-ALTER TABLE user_rewards AUTO_INCREMENT = 1;
--- Insert multiple users dynamically using a loop or random generator
-INSERT INTO users (username, email, password, created_at)
-SELECT 
-    CONCAT('player', n) AS username,
-    CONCAT('player', n, '@example.com') AS email,
-    'password123' AS password,
-    NOW() AS created_at
-FROM (
-    SELECT n FROM (SELECT 1 AS n UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5) t
-) numbers;
+# Seed users
+def seed_users(num_users):
+    user_data = [
+        {
+            'username': f"player{i}",
+            'email': f"player{i}@example.com",
+            'password': "password123",
+            'created_at': faker.date_time_this_year()
+        }
+        for i in range(1, num_users + 1)
+    ]
+    session.execute(users.insert(), user_data)
+    session.commit()
+    print(f"Inserted {num_users} users.")
 
--- Check inserted users
-SELECT * FROM users;
--- Insert rewards dynamically
-INSERT INTO level_rewards (level_name, reward_type, reward_amount, created_at)
-SELECT 
-    CONCAT('Level ', n) AS level_name,
-    CASE WHEN n % 3 = 0 THEN 'Item' 
-         WHEN n % 5 = 0 THEN 'Gems' 
-         ELSE 'Coins' 
-    END AS reward_type,
-    CASE WHEN n % 3 = 0 THEN 1 
-         ELSE ROUND(RAND() * 500) + 50 
-    END AS reward_amount,
-    NOW() AS created_at
-FROM (
-    SELECT n FROM (SELECT 1 AS n UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9 UNION ALL SELECT 10) t
-) numbers;
+# Seed levels
+def seed_levels(num_levels):
+    level_data = [
+        {
+            'level_name': f"Level {i}",
+            'reward_type': random.choice(['Coins', 'Item', 'Gems', 'Bonus']),
+            'reward_amount': round(random.uniform(50, 500), 2),
+            'created_at': faker.date_time_this_year()
+        }
+        for i in range(1, num_levels + 1)
+    ]
+    session.execute(level_rewards.insert(), level_data)
+    session.commit()
+    print(f"Inserted {num_levels} levels.")
 
--- Check inserted levels
-SELECT * FROM level_rewards;
--- Assign random rewards to users
-INSERT INTO user_rewards (user_id, level_id, claimed_at)
-SELECT 
-    u.id AS user_id,
-    l.level_id AS level_id,
-    CASE WHEN RAND() > 0.5 THEN NOW() ELSE NULL END AS claimed_at -- 50% chance of claiming
-FROM users u
-CROSS JOIN level_rewards l
-WHERE RAND() > 0.7; -- Assign rewards to ~30% of possible combinations
+# Seed user_rewards
+def seed_user_rewards(user_ids, level_ids, claim_probability=0.7):
+    reward_data = []
+    for user_id in user_ids:
+        for level_id in random.sample(level_ids, random.randint(1, len(level_ids))):
+            reward_data.append({
+                'user_id': user_id,
+                'level_id': level_id,
+                'claimed_at': faker.date_time_this_year() if random.random() < claim_probability else None
+            })
+    session.execute(user_rewards.insert(), reward_data)
+    session.commit()
+    print(f"Inserted {len(reward_data)} user rewards.")
 
--- Check inserted user rewards
-SELECT * FROM user_rewards;
-DELIMITER $$
+# Execute seeding
+def main():
+    num_users = 1000
+    num_levels = 500
 
-CREATE PROCEDURE GenerateRewards(IN num_levels INT)
-BEGIN
-    DECLARE i INT DEFAULT 1;
+    seed_users(num_users)
+    seed_levels(num_levels)
 
-    WHILE i <= num_levels DO
-        INSERT INTO level_rewards (level_name, reward_type, reward_amount, created_at)
-        VALUES (
-            CONCAT('Level ', i),
-            CASE 
-                WHEN i % 3 = 0 THEN 'Item'
-                WHEN i % 5 = 0 THEN 'Gems'
-                ELSE 'Coins'
-            END,
-            CASE 
-                WHEN i % 3 = 0 THEN 1
-                ELSE ROUND(RAND() * 500) + 50
-            END,
-            NOW()
-        );
-        SET i = i + 1;
-    END WHILE;
-END$$
+    user_ids = [row.id for row in session.query(users.c.id).all()]
+    level_ids = [row.level_id for row in session.query(level_rewards.c.level_id).all()]
+    seed_user_rewards(user_ids, level_ids)
 
-DELIMITER ;
-CALL GenerateRewards(100); -- Generate 100 levels dynamically
-SELECT * FROM level_rewards;
--- Check users
-SELECT * FROM users;
-
--- Check level rewards
-SELECT * FROM level_rewards;
-
--- Check user rewards
-SELECT * FROM user_rewards;
+if __name__ == "__main__":
+    main()
