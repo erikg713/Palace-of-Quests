@@ -75,3 +75,15 @@ def delete_item(item_id):
         return jsonify({'message': 'Item deleted successfully'}), 200
     except Exception as e:
         return jsonify({'error': 'Something went wrong'}), 500
+        @marketplace_bp.route('/api/marketplace/list', methods=['POST'])
+def list_item():
+    data = request.json
+    user_id = data['user_id']
+    item_name = data['item_name']
+    price = data['price']
+
+    new_item = MarketplaceItem(user_id=user_id, item_name=item_name, price=price)
+    db.session.add(new_item)
+    db.session.commit()
+
+    return jsonify({"message": "Item listed successfully"})
