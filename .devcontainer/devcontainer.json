@@ -33,3 +33,4 @@
   "runServices": ["app", "db"],
   "shutdownAction": "stopCompose"
 }
+"ghcr.io/wxw-matt/devcontainer-features/command_runner:0": {}
