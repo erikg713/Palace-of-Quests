@@ -75,3 +75,14 @@ class Subscription(db.Model):
     end_date = db.Column(db.DateTime, nullable=False)
     amount_paid = db.Column(db.Numeric(10, 2), nullable=False)
     payment_status = db.Column(db.String(20), default="Pending")
+    class QuestProgress(db.Model):
+    __tablename__ = 'quest_progress'
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    quest_id = db.Column(db.Integer, db.ForeignKey('quests.id'), nullable=False)
+    progress = db.Column(db.Float, default=0.0)  # Percentage completion (0.0 to 100.0)
+    completed = db.Column(db.Boolean, default=False)
+    last_updated = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+    def __repr__(self):
+        return f"<QuestProgress User {self.user_id}, Quest {self.quest_id}>"
