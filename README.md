@@ -150,7 +150,33 @@ Palace-of-Quests/
     ├── public/
     └── package.json
 
-
+palace-of-quests/
+│
+├── frontend/
+│   ├── public/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── App.js
+│   │   ├── index.js
+│   ├── package.json
+│   ├── README.md
+│
+├── backend/
+│   ├── app.py
+│   ├── requirements.txt
+│   ├── config.py
+│   ├── models/
+│   │   ├── database.py
+│   │   ├── user.py
+│   │   ├── quest.py
+│   │   ├── marketplace_item.py
+│
+├── database/
+│   ├── migrations.sql
+│   ├── init.sql
+│
+├── README.md
 ---
 
 Installation
