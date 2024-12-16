@@ -9,7 +9,19 @@ import Marketplace from './components/Marketplace/Marketplace';
 import AddItem from './components/Marketplace/AddItem';
 import AdminPanel from './components/Admin/AdminPanel';
 import UserDashboard from './components/Shared/UserDashboard';
+import { UserProvider } from './context/UserContext';
 
+function App() {
+  return (
+    <UserProvider>
+      <Router>
+        {/* All Routes and Components */}
+      </Router>
+    </UserProvider>
+  );
+}
+
+export default App;
 function App() {
   const [userId, setUserId] = useState(null);
   const [notifications, setNotifications] = useState([]);
