@@ -12,17 +12,6 @@ import UserDashboard from './components/Shared/UserDashboard';
 import { UserProvider } from './context/UserContext';
 
 function App() {
-  return (
-    <UserProvider>
-      <Router>
-        {/* All Routes and Components */}
-      </Router>
-    </UserProvider>
-  );
-}
-
-export default App;
-function App() {
   const [userId, setUserId] = useState(null);
   const [notifications, setNotifications] = useState([]);
 
@@ -34,40 +23,42 @@ function App() {
   };
 
   return (
-    <Router>
-      <Header />
-      <Notifications messages={notifications} />
-      <Routes>
-        <Route
-          path="/"
-          element={!userId ? <Login setUser={setUserId} /> : <Navigate to="/dashboard" />}
-        />
-        <Route
-          path="/quests"
-          element={userId ? <QuestList userId={userId} /> : <Navigate to="/" />}
-        />
-        <Route
-          path="/completed-quests"
-          element={userId ? <CompletedQuests userId={userId} /> : <Navigate to="/" />}
-        />
-        <Route
-          path="/marketplace"
-          element={userId ? <Marketplace userId={userId} /> : <Navigate to="/" />}
-        />
-        <Route
-          path="/marketplace/add"
-          element={userId ? <AddItem /> : <Navigate to="/" />}
-        />
-        <Route
-          path="/admin"
-          element={userId ? <AdminPanel /> : <Navigate to="/" />}
-        />
-        <Route
-          path="/dashboard"
-          element={userId ? <UserDashboard userId={userId} /> : <Navigate to="/" />}
-        />
-      </Routes>
-    </Router>
+    <UserProvider>
+      <Router>
+        <Header />
+        <Notifications messages={notifications} />
+        <Routes>
+          <Route
+            path="/"
+            element={!userId ? <Login setUser={setUserId} /> : <Navigate to="/dashboard" />}
+          />
+          <Route
+            path="/quests"
+            element={userId ? <QuestList userId={userId} /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/completed-quests"
+            element={userId ? <CompletedQuests userId={userId} /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/marketplace"
+            element={userId ? <Marketplace userId={userId} /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/marketplace/add"
+            element={userId ? <AddItem /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/admin"
+            element={userId ? <AdminPanel /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/dashboard"
+            element={userId ? <UserDashboard userId={userId} /> : <Navigate to="/" />}
+          />
+        </Routes>
+      </Router>
+    </UserProvider>
   );
 }
 
