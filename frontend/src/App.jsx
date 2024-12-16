@@ -1,40 +1,60 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import Dashboard from "./pages/Dashboard";
-
-const App = () => {
-  const userToken = "your-auth-token"; // Replace with actual JWT logic
-
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/dashboard" element={<Dashboard userToken={userToken} />} />
-      </Routes>
-    </Router>
-  );
-};
-
-export default App;
-import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Home from './pages/Home';
-import Marketplace from './pages/Marketplace';
-import Profile from './pages/Profile';
-import MobileNav from './components/MobileNav';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import Header from './components/Shared/Header';
+import Notifications from './components/Shared/Notifications';
+import Login from './components/Authentication/Login';
+import QuestList from './components/Quests/QuestList';
+import CompletedQuests from './components/Quests/CompletedQuests';
+import Marketplace from './components/Marketplace/Marketplace';
+import AddItem from './components/Marketplace/AddItem';
+import AdminPanel from './components/Admin/AdminPanel';
+import UserDashboard from './components/Shared/UserDashboard';
 
 function App() {
+  const [userId, setUserId] = useState(null);
+  const [notifications, setNotifications] = useState([]);
+
+  const addNotification = (message) => {
+    setNotifications((prev) => [...prev, message]);
+    setTimeout(() => {
+      setNotifications((prev) => prev.slice(1));
+    }, 5000); // Remove notification after 5 seconds
+  };
+
   return (
     <Router>
-      <div className="container">
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/marketplace" component={Marketplace} />
-          <Route path="/profile" component={Profile} />
-        </Switch>
-        <MobileNav /> {/* Persistent bottom navigation for mobile */}
-      </div>
+      <Header />
+      <Notifications messages={notifications} />
+      <Routes>
+        <Route
+          path="/"
+          element={!userId ? <Login setUser={setUserId} /> : <Navigate to="/dashboard" />}
+        />
+        <Route
+          path="/quests"
+          element={userId ? <QuestList userId={userId} /> : <Navigate to="/" />}
+        />
+        <Route
+          path="/completed-quests"
+          element={userId ? <CompletedQuests userId={userId} /> : <Navigate to="/" />}
+        />
+        <Route
+          path="/marketplace"
+          element={userId ? <Marketplace userId={userId} /> : <Navigate to="/" />}
+        />
+        <Route
+          path="/marketplace/add"
+          element={userId ? <AddItem /> : <Navigate to="/" />}
+        />
+        <Route
+          path="/admin"
+          element={userId ? <AdminPanel /> : <Navigate to="/" />}
+        />
+        <Route
+          path="/dashboard"
+          element={userId ? <UserDashboard userId={userId} /> : <Navigate to="/" />}
+        />
+      </Routes>
     </Router>
   );
 }
