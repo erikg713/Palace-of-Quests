@@ -1,8 +1,8 @@
-from flask_sqlalchemy import SQLAlchemy
-db = SQLAlchemy()
+import mongoose from 'mongoose';
 
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True, nullable=False)
-    password = db.Column(db.String(120), nullable=False)
-    progress = db.Column(db.JSON, nullable=True)
+const userSchema = new mongoose.Schema({
+    username: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+});
+
+export default mongoose.model('User', userSchema);
