@@ -91,3 +91,10 @@ class Subscription(db.Model):
 
     def __repr__(self):
         return f"<QuestProgress User {self.user_id}, Quest {self.quest_id}>"
+class Payment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    payment_identifier = db.Column(db.String(128), unique=True, nullable=False)
+    amount = db.Column(db.Float, nullable=False)
+    status = db.Column(db.String(32), default="PENDING")
+    created_at = db.Column(db.DateTime, default=db.func.now())
