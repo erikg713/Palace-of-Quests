@@ -1,32 +1,36 @@
 from flask import Blueprint, request, jsonify
-from app.models import User
-from app import db
-from flask_jwt_extended import create_access_token
+from app.models import db, User
+from app.utils.jwt_utils import generate_jwt, decode_jwt
+from bcrypt import hashpw, gensalt, checkpw
 
 auth_bp = Blueprint('auth', __name__)
 
-@auth_bp.route('/api/register', methods=['POST'])
+@auth_bp.route('/register', methods=['POST'])
 def register():
-    data = request.json
+    data = request.get_json()
     username = data.get('username')
-    email = data.get('email')
     password = data.get('password')
 
-    new_user = User(username=username, email=email, password_hash=password)
+    if not username or not password:
+        return jsonify({"error": "Username and password are required"}), 400
+
+    hashed_password = hashpw(password.encode('utf-8'), gensalt())
+    new_user = User(username=username, password=hashed_password)
+
     db.session.add(new_user)
     db.session.commit()
 
-    return jsonify({"message": "User registered successfully", "user_id": new_user.id}), 201
+    return jsonify({"message": "User registered successfully"}), 201
 
-@auth_bp.route('/api/login', methods=['POST'])
+@auth_bp.route('/login', methods=['POST'])
 def login():
-    data = request.json
-    email = data.get('email')
+    data = request.get_json()
+    username = data.get('username')
     password = data.get('password')
 
-    user = User.query.filter_by(email=email).first()
-    if user and user.check_password(password):
-        access_token = create_access_token(identity=user.id)
-        return jsonify({"token": access_token, "user_id": user.id})
+    user = User.query.filter_by(username=username).first()
+    if not user or not checkpw(password.encode('utf-8'), user.password):
+        return jsonify({"error": "Invalid username or password"}), 401
 
-    return jsonify({"message": "Invalid credentials"}), 401
+    token = generate_jwt({"user_id": user.id})
+    return jsonify({"token": token}), 200
