@@ -1,1 +1,111 @@
+# GitLab CI/CD Configuration for Palace of Quests
+image: ubuntu:latest
 
+variables:
+  UNITY_VERSION: "2022.3.16f1"
+  BUILD_NAME: "palace-of-quests"
+  
+stages:
+  - test
+  - build
+  - package
+  - deploy
+
+cache:
+  paths:
+    - Library/
+    - .packages/
+    - Temp/
+
+# Run unit tests
+unit_tests:
+  stage: test
+  script:
+    - echo "Running unit tests"
+    - ./run_unit_tests.sh
+  artifacts:
+    reports:
+      junit: test-results.xml
+    expire_in: 1 week
+
+# Run integration tests
+integration_tests:
+  stage: test
+  script:
+    - echo "Running integration tests"
+    - ./run_integration_tests.sh
+  artifacts:
+    reports:
+      junit: integration-test-results.xml
+    expire_in: 1 week
+
+# Build for Windows
+build_windows:
+  stage: build
+  script:
+    - echo "Building Windows version"
+    - ./build_windows.sh
+  artifacts:
+    paths:
+      - builds/windows/
+    expire_in: 1 week
+
+# Build for macOS
+build_macos:
+  stage: build
+  script:
+    - echo "Building macOS version"
+    - ./build_macos.sh
+  artifacts:
+    paths:
+      - builds/macos/
+    expire_in: 1 week
+
+# Package Windows build
+package_windows:
+  stage: package
+  dependencies:
+    - build_windows
+  script:
+    - echo "Packaging Windows build"
+    - zip -r ${BUILD_NAME}-windows.zip builds/windows/
+  artifacts:
+    paths:
+      - ${BUILD_NAME}-windows.zip
+    expire_in: 1 month
+
+# Package macOS build
+package_macos:
+  stage: package
+  dependencies:
+    - build_macos
+  script:
+    - echo "Packaging macOS build"
+    - zip -r ${BUILD_NAME}-macos.zip builds/macos/
+  artifacts:
+    paths:
+      - ${BUILD_NAME}-macos.zip
+    expire_in: 1 month
+
+# Deploy to staging
+deploy_staging:
+  stage: deploy
+  script:
+    - echo "Deploying to staging environment"
+    - ./deploy_staging.sh
+  environment:
+    name: staging
+  only:
+    - develop
+
+# Deploy to production
+deploy_production:
+  stage: deploy
+  script:
+    - echo "Deploying to production environment"
+    - ./deploy_production.sh
+  environment:
+    name: production
+  only:
+    - main
+  when: manual
