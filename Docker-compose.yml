@@ -17,3 +17,17 @@ services:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
       POSTGRES_DB: palace_of_quests
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "5000:5000"
+  
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3000:3000"
