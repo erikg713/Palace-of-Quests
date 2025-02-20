@@ -2,14 +2,21 @@ version: '3.8'
 
 services:
   backend:
-    build: ./backend
+    build:
+      context: ./backend
     ports:
       - "5000:5000"
-  
+    environment:
+      - FLASK_ENV=development
+      - DATABASE_URL=postgresql://user:password@database/palace_of_quests
+
   frontend:
-    build: ./frontend
+    build:
+      context: ./frontend
     ports:
       - "3000:3000"
+    environment:
+      - REACT_APP_API_URL=http://localhost:5000/api
 
   database:
     image: postgres:15-alpine
@@ -17,17 +24,5 @@ services:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
       POSTGRES_DB: palace_of_quests
-version: '3.8'
-
-services:
-  backend:
-    build:
-      context: ./backend
     ports:
-      - "5000:5000"
-  
-  frontend:
-    build:
-      context: ./frontend
-    ports:
-      - "3000:3000"
+      - "5432:5432"
