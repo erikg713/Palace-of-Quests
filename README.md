@@ -66,6 +66,7 @@ pip install selenium webdriver-manager
 npx react-native init PalaceOfQuestsMobile
 cd PalaceOfQuestsMobile
 npm install axios react-navigation react-native-async-storage
+npm install --save-dev jest @testing-library/react @testing-library/jest-dom @testing-library/user-event
 
 mkdir backend && cd backend
 python -m venv venv
