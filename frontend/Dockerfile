@@ -1,15 +1,21 @@
-# React Dockerfile
-FROM node:18-slim
+# Use an official Node.js runtime as a parent image
+FROM node:18-alpine
 
-WORKDIR /client
-COPY client/package.json client/package-lock.json ./
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy package.json and install dependencies
+COPY package.json .
 RUN npm install
 
-COPY client ./
+# Copy the rest of the application code
+COPY . .
 
-# Build the React app
+# Build the React app for production
 RUN npm run build
 
-# Serve the app using a lightweight HTTP server
-RUN npm install -g serve
-CMD ["serve", "-s", "build", "-l", "3000"]
+# Expose port 3000 for React
+EXPOSE 3000
+
+# Serve the application using a lightweight HTTP server
+CMD ["npm", "start"]
