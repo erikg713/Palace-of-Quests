@@ -2,6 +2,9 @@ Palace of Quests Frontend
 
 This is the frontend codebase for Palace of Quests, a Web3-based application that integrates the Pi Network SDK for secure payments and user authentication.
 
+npx create-react-app frontend
+cd frontend
+npm install bootstrap react-router-dom modernizr
 
 ---
 
