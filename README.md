@@ -1,113 +1,31 @@
-Palace of Quests (Pi Quest)
-
-
-
-
-
 Palace of Quests (Pi Quest) is a Web3-enabled metaverse game that blends immersive gameplay with decentralized transactions. Built on the Pi Network, players can explore an evolving virtual world, level up their avatars, and earn in-game rewards. Future enhancements include cross-chain compatibility, bridging to Ethereum, and expansive questing across multiple networks.
-
-
 ---
-
 Table of Contents
-
-1. Features
-
-
-2. Tech Stack
-
-
-3. How It Works
-
-
-4. Project Structure
-
-
-5. Installation
-
-Prerequisites
-
-Backend Setup
-
-Frontend Setup
-
-Docker Setup
-
-
-
-6. Roadmap
-
-
-7. Contributing
-
-
-8. License
-
-
-9. Contact
-
-
-
-
 ---
-
 Features
-
 Metaverse Gameplay: Progress from level 1 to 250, unlocking new challenges, quests, and storylines.
-
 Rewards and Experience: Earn experience points and in-game currency to upgrade your avatar’s abilities and appearance.
-
 Premium Subscription: Access all unlocked upgrades for $9.99/year.
-
 Blockchain Integration: Seamlessly integrated with the Pi Network SDK (U2A) for secure, peer-to-peer payments.
-
 Cross-Chain Compatibility (Planned): Connect to Ethereum and Tide networks for broader marketplace and questing opportunities.
-
 Robust Database: Leveraging PostgreSQL for reliable data storage and efficient querying.
-
 Clean, Scalable Code: Structured backend (Flask) and frontend (React) ensure maintainability and future-proofing.
-
-
-
 ---
-
 Tech Stack
-
 Frontend:
-
 React (Web)
-
 React Native (Future) for mobile platforms
-
-
 Backend:
-
 Flask (Python)
-
 PostgreSQL Database
-
-
 Blockchain:
-
 Pi Network (Primary)
-
 Ethereum (Planned)
-
-Tide Network (Planned)
-
-
 Additional Tools:
-
 JWT for authentication
-
 Docker for containerization
-
 CI/CD integrations (planned)
-
-Testing frameworks (pytest, Jest) (recommended)
-
-
-
+Testing frameworks (pytest, Jest) 
 ---
 
 How It Works
@@ -125,31 +43,10 @@ How It Works
 
 
 5. Secure Transactions: Use the Pi Network SDK for frictionless, decentralized, peer-to-peer payments.
-
-
-
-
+---
 ---
 
-Project Structure
-
-Palace-of-Quests/
-├── backend/
-│   ├── app/
-│   │   ├── config.py
-│   │   ├── models/
-│   │   ├── routes/
-│   │   └── services/
-│   ├── requirements.txt
-│   └── wsgi.py
-└── frontend/
-    ├── src/
-    │   ├── components/
-    │   ├── pages/
-    │   └── utils/
-    ├── public/
-    └── package.json
-
+*** Project Structure ***
 palace-of-quests/
 │
 ├── frontend/
