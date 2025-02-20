@@ -10,6 +10,20 @@ import AddItem from './components/Marketplace/AddItem';
 import AdminPanel from './components/Admin/AdminPanel';
 import UserDashboard from './components/Shared/UserDashboard';
 import { UserProvider } from './context/UserContext';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import LoginForm from './components/LoginForm';
+
+const App = () => (
+  <Router>
+    <Routes>
+      <Route path="/login" element={<LoginForm />} />
+      {/* Add other routes here */}
+    </Routes>
+  </Router>
+);
+
+export default App;
 
 function App() {
   const [userId, setUserId] = useState(null);
