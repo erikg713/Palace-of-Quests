@@ -62,6 +62,7 @@ Python 3.10+
 Node.js 18+
 PostgreSQL 15+
 Docker (Optional)
+pip install selenium webdriver-manager
 
 mkdir backend && cd backend
 python -m venv venv
