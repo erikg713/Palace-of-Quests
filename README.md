@@ -27,25 +27,6 @@ Docker for containerization
 CI/CD integrations (planned)
 Testing frameworks (pytest, Jest) 
 ---
-
-How It Works
-
-1. Create an Account: Sign up using your Pi Network credentials.
-
-
-2. Begin Your Journey: Start at level 1 and complete quests and challenges to gain rewards.
-
-
-3. Avatar Upgrades: Spend earned rewards on new gear, abilities, and visual enhancements.
-
-
-4. Go Premium: Unlock all in-game upgrades for a yearly subscription fee.
-
-
-5. Secure Transactions: Use the Pi Network SDK for frictionless, decentralized, peer-to-peer payments.
----
----
-
 *** Project Structure ***
 palace-of-quests/
 │
@@ -75,42 +56,17 @@ palace-of-quests/
 │
 ├── README.md
 ---
-
 Installation
-
 Prerequisites
-
 Python 3.10+
-
 Node.js 18+
-
 PostgreSQL 15+
+Docker (Optional)
 
-Docker (Optional, for containerized deployment)
-
-
-Backend Setup
-
-1. Clone the repository:
-
-git clone https://github.com/erikg713/palace-of-quests.git
-
-
-2. Navigate to the backend directory:
-
-cd palace-of-quests/backend
-
-
-3. Install dependencies:
-
-pip install -r requirements.txt
-
-
-4. Run the development server:
-
-flask run
-
-
+mkdir backend && cd backend
+python -m venv venv
+source venv/bin/activate  # Activate virtual environment
+pip install flask flask-sqlalchemy flask-migrate flask-jwt-extended flask-cors
 
 Frontend Setup
 
