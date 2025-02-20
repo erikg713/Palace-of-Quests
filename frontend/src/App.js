@@ -13,6 +13,29 @@ import { UserProvider } from './context/UserContext';
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import LoginForm from './components/LoginForm';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import AboutPage from "./pages/AboutPage";
+import "./App.css"; // Custom CSS for overrides
+
+const App = () => {
+  return (
+    <Router>
+      <div className="container">
+        <header className="text-center my-4">
+          <h1>Palace of Quests</h1>
+        </header>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+        </Routes>
+      </div>
+    </Router>
+  );
+};
+
+export default App;
 
 const App = () => (
   <Router>
