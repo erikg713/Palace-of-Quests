@@ -73,6 +73,8 @@ By default, the app runs at http://localhost:3000.
 2. Pi Network Integration: Ensure your Pi Network App is registered and linked to the correct domain via the Pi Developer Portal.
 
 
+npx create-react-app frontend --template cra-template-pwa  # Add PWA support (optional)
+cd frontend && npm install axios react-router-dom bootstrap
 
 
 ---
