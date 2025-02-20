@@ -96,6 +96,9 @@ docker-compose build
 2. Run the application:
 
 docker-compose up
+flask db init        # Initialize migrations folder
+flask db migrate -m "Initial migration"
+flask db upgrade     # Apply migrations to the database
 
 
 
