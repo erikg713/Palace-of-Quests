@@ -63,6 +63,9 @@ Node.js 18+
 PostgreSQL 15+
 Docker (Optional)
 pip install selenium webdriver-manager
+npx react-native init PalaceOfQuestsMobile
+cd PalaceOfQuestsMobile
+npm install axios react-navigation react-native-async-storage
 
 mkdir backend && cd backend
 python -m venv venv
