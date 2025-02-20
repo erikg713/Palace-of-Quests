@@ -1,6 +1,10 @@
 Palace of Quests Backend
 
 This is the backend service for Palace of Quests, a Web3 application integrating the Pi Network SDK to enable secure transactions and user authentication. It is built with Flask and supports PostgreSQL as the database.
+mkdir backend && cd backend
+python -m venv venv
+source venv/bin/activate
+pip install flask flask-cors flask-restful
 
 
 ---
