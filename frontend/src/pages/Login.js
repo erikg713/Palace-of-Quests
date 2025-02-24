@@ -5,15 +5,15 @@ const Login = () => {
   const { login } = useContext(UserContext);
   const [credentials, setCredentials] = useState({ username: '', password: '' });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Perform authentication (API call)
-    const userData = {
-      id: 1,
-      username: credentials.username,
-      role: 'user', // or 'admin'
-    };
-    login(userData);
+    // Assume authenticate is a function that verifies user credentials
+    const userData = await authenticate(credentials);
+    if (userData) {
+      login(userData);
+    } else {
+      // Handle login failure
+    }
   };
 
   return (
