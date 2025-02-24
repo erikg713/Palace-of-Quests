@@ -19,3 +19,18 @@ const ProtectedRoute = ({ element: Component, roles, ...rest }) => {
 };
 
 export default ProtectedRoute;
+const ProtectedRoute = ({ children, roles }) => {
+  const { user } = useContext(UserContext);
+
+  if (!user) {
+    return <Navigate to="/login" />;
+  }
+
+  if (roles && !roles.includes(user.role)) {
+    return <Navigate to="/unauthorized" />;
+  }
+
+  return children;
+};
+
+export default ProtectedRoute;
