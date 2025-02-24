@@ -24,6 +24,19 @@ import HomePage from './pages/HomePage';
 import QuestPage from './pages/QuestPage';
 import LoginPage from './pages/LoginPage';
 import Navbar from './components/Navbar';
+import React from 'react';
+import Payment from './components/Payment';
+
+const App = () => {
+    return (
+        <div>
+            <h1>Payment App</h1>
+            <Payment />
+        </div>
+    );
+};
+
+export default App;
 
 function App() {
   return (
