@@ -15,6 +15,12 @@ const RoutesConfig = () => {
   // Tracks route changes
   useAnalytics();
 
+  const QuestList = React.lazy(() => import('./components/Quests/QuestList'));
+
+<Suspense fallback={<div>Loading...</div>}>
+  <QuestList />
+</Suspense>
+
   return (
     <ErrorBoundary>
       <Routes>
