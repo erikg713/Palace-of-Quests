@@ -1,46 +1,22 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import ReactDOM from 'react-dom/client';
+import React from 'react';
+import ReactDOM from 'react-dom/client'; // Import from 'react-dom/client' for React 18
 import App from './App';
 import { UserProvider } from './context/UserContext';
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <UserProvider>
-    <App />
-  </UserProvider>
-);
-
-ReactDOM.render(
-  <React.StrictMode>
-    <PalaceOfQuests />
-  </React.StrictMode>,
-  document.getElementById("root")
-);
-
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './assets/styles/styles.css';
-import App from './App';
-
-ReactDOM.render(<App />, document.getElementById('root'));
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import './styles/global.css';
-
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
 import { NotificationProvider } from './context/NotificationContext';
 
+// If you have global styles
+import './styles/global.css';
+
+// Create a root using React 18's createRoot
+const root = ReactDOM.createRoot(document.getElementById('root'));
+
+// Render your app wrapped with Context Providers
 root.render(
-  <UserProvider>
-    <NotificationProvider>
-      <App />
-    </NotificationProvider>
-  </UserProvider>
+  <React.StrictMode>
+    <UserProvider>
+      <NotificationProvider>
+        <App />
+      </NotificationProvider>
+    </UserProvider>
+  </React.StrictMode>
 );
