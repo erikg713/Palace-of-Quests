@@ -44,3 +44,27 @@ function App() {
 }
 
 export default App;
+import ProtectedRoute from './ProtectedRoute';
+
+// ...
+
+<Routes>
+  {/* Public routes */}
+  <Route path="/" element={<HomePage />} />
+  <Route path="/about" element={<AboutPage />} />
+  <Route
+    path="/login"
+    element={!user ? <Login /> : <Navigate to="/dashboard" />}
+  />
+
+  {/* Protected routes */}
+  <Route
+    path="/quests"
+    element={<ProtectedRoute element={QuestList} />}
+  />
+  <Route
+    path="/admin"
+    element={<ProtectedRoute element={AdminPanel} roles={['admin']} />}
+  />
+  {/* ...other routes */}
+</Routes>
