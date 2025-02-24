@@ -50,5 +50,31 @@ function App() {
     </Router>
   );
 }
+import React, { useState } from 'react';
+import PiAuth from './components/Authentication/PiAuth';
+import Marketplace from './components/Marketplace/Marketplace';
+
+function App() {
+  const [authData, setAuthData] = useState(null);
+
+  const handleAuthenticated = (auth) => {
+    setAuthData(auth);
+  };
+
+  return (
+    <div>
+      {!authData ? (
+        <PiAuth onAuthenticated={handleAuthenticated} />
+      ) : (
+        <>
+          <h1>Welcome, {authData.user.username}!</h1>
+          <Marketplace />
+        </>
+      )}
+    </div>
+  );
+}
+
+export default App;
 
 export default App;
