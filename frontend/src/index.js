@@ -35,3 +35,12 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
+import { NotificationProvider } from './context/NotificationContext';
+
+root.render(
+  <UserProvider>
+    <NotificationProvider>
+      <App />
+    </NotificationProvider>
+  </UserProvider>
+);
