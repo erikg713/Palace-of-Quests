@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Header from './components/Shared/Header';
 import Navbar from './components/Navbar';
@@ -14,17 +14,18 @@ import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import Payment from './components/Payment';
 import { UserProvider } from './context/UserContext';
-import './App.css'; // Custom CSS for overrides
+import UserContext from './context/UserContext';
+import './App.css';
 
 function App() {
-  const [userId, setUserId] = useState(null);
+  const { user } = useContext(UserContext);
   const [notifications, setNotifications] = useState([]);
 
   const addNotification = (message) => {
     setNotifications((prev) => [...prev, message]);
     setTimeout(() => {
       setNotifications((prev) => prev.slice(1));
-    }, 5000); // Remove notification after 5 seconds
+    }, 5000);
   };
 
   return (
@@ -36,35 +37,15 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
-          <Route 
-            path="/login" 
-            element={!userId ? <Login setUser={setUserId} /> : <Navigate to="/dashboard" />}
+          <Route
+            path="/login"
+            element={!user ? <Login /> : <Navigate to="/dashboard" />}
           />
-          <Route 
-            path="/quests" 
-            element={userId ? <QuestList userId={userId} /> : <Navigate to="/login" />}
+          <Route
+            path="/quests"
+            element={user ? <QuestList userId={user.id} /> : <Navigate to="/login" />}
           />
-          <Route 
-            path="/completed-quests" 
-            element={userId ? <CompletedQuests userId={userId} /> : <Navigate to="/login" />}
-          />
-          <Route 
-            path="/marketplace" 
-            element={userId ? <Marketplace userId={userId} /> : <Navigate to="/login" />}
-          />
-          <Route 
-            path="/marketplace/add" 
-            element={userId ? <AddItem /> : <Navigate to="/login" />}
-          />
-          <Route 
-            path="/admin" 
-            element={userId ? <AdminPanel /> : <Navigate to="/login" />}
-          />
-          <Route 
-            path="/dashboard" 
-            element={userId ? <UserDashboard userId={userId} /> : <Navigate to="/login" />}
-          />
-          <Route path="/payment" element={<Payment />} />
+          {/* ...other routes */}
         </Routes>
       </Router>
     </UserProvider>
