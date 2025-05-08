@@ -10,4 +10,4 @@ psycopg2==2.9.10
 pi-sdk==1.0.0  # Placeholder for the actual Pi Network SDK
 gunicorn==23.0.0
 Flask-JWT-Extended==4.7.1
-cryptography==44.0.1
+cryptography==44.0.3
