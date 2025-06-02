@@ -6,7 +6,16 @@ python -m venv venv
 source venv/bin/activate
 pip install flask flask-cors flask-restful
 
-
+## Table of Contents
+- [Features](#features)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Development](#development)
+- [API Endpoints](#api-endpoints)
+- [Docker Deployment](#docker-deployment)
+- [Deployment](#deployment)
+- [Contributing](#contributing)
+- [License](#license)
 ---
 
 Features
