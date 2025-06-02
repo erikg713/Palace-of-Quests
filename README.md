@@ -186,3 +186,5 @@ For more details, visit the official Pi Network documentation.
 
 For questions, feedback, or support, please reach out via email:  
 📧 **piquests@gmail.com**
+
+[GitHub Repository](https://github.com/erikg713/Palace-of-Quests.git)
