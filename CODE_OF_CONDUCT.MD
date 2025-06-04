@@ -45,7 +45,7 @@ This Code of Conduct applies to all community spaces and communication channels 
 If you witness or experience any behavior that violates this Code of Conduct, please contact the project maintainers at:
 
 **Palace of Quests Team**  
-📧 Email: palaceofquests@yourdomain.com
+📧 Email: palaceofquests@protonmail.com
 
 All reports will be handled promptly and confidentially.
 
