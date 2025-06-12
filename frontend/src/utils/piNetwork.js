@@ -54,3 +54,43 @@ export const initiateSubscription = () => callApi("post", "/payment/subscribe");
  */
 export const verifyPayment = (paymentId) =>
   callApi("post", "/payment/verify", { payment_id: paymentId });
+
+import axios from "axios";
+
+const BASE_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:5000";
+const api = axios.create({
+  baseURL: BASE_URL,
+  headers: { "Content-Type": "application/json" }
+});
+
+const handleApiError = (error) => {
+  const msg =
+    error?.response?.data?.message ||
+    error?.response?.data?.error ||
+    error?.message ||
+    "An unknown error occurred";
+  if (process.env.NODE_ENV === "development") {
+    console.error(error);
+  } else {
+    console.error(msg);
+  }
+  throw new Error(msg);
+};
+
+export const initiateSubscription = async () => {
+  try {
+    const res = await api.post("/payment/subscribe");
+    return res.data;
+  } catch (err) {
+    handleApiError(err);
+  }
+};
+
+export const verifyPayment = async (paymentId) => {
+  try {
+    const res = await api.post("/payment/verify", { payment_id: paymentId });
+    return res.data;
+  } catch (err) {
+    handleApiError(err);
+  }
+};
