@@ -22,3 +22,35 @@
   <script src="/bundle.js"></script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Palace of Quests</title>
+
+    <!-- Import the Pi Network App Platform SDK -->
+    <script src="https://sdk.minepi.com/pi-sdk.js"></script>
+
+    <!-- Pi SDK Initialization -->
+    <script>
+      // Ensure window.__ENV is defined safely
+      window.__ENV = window.__ENV || {};
+
+      // Get sandbox mode flag from env (treat as string)
+      const runSDKInSandboxMode = window.__ENV.sandbox === 'true';
+      console.log('[Pi SDK] Sandbox Mode:', runSDKInSandboxMode);
+
+      // Initialize the Pi SDK
+      Pi.init({
+        version: '2.0',
+        sandbox: runSDKInSandboxMode,
+      });
+    </script>
+  </head>
+
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+  </body>
+</html>
