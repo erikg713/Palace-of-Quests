@@ -1,6 +1,10 @@
 from flask import Flask, request, jsonify
 from pi_sdk_client import create_payment, submit_payment, complete_payment
 from db import store_payment, update_payment, get_payment
+export FLASK_APP=app
+flask db init
+flask db migrate -m "Initial migration for Palace of Quests schema"
+flask db upgrade
 
 app = Flask(__name__)
 
