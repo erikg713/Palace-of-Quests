@@ -3,120 +3,26 @@
   "dockerComposeFile": "docker-compose.yml",
   "service": "app",
   "workspaceFolder": "/workspace",
-  
-  // VS Code extensions for Python, JavaScript, Docker, and database development
   "extensions": [
-    // Python development
     "ms-python.python",
     "ms-python.vscode-pylance",
-    "ms-python.black-formatter",
-    "njpwerner.autodocstring",
-    
-    // JavaScript/TypeScript development
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
-    "csstools.postcss",
-    "bradlc.vscode-tailwindcss",
-    
-    // Docker and container tools
-    "ms-azuretools.vscode-docker",
-    
-    // Database tools
-    "mtxr.sqltools",
-    "mtxr.sqltools-driver-pg",
-    
-    // Git integration
-    "github.vscode-pull-request-github",
     "eamodio.gitlens",
-    
-    // Testing
-    "littlefoxteam.vscode-python-test-adapter",
-    "ryanluker.vscode-coverage-gutters",
-    
-    // Developer experience
-    "visualstudioexptteam.vscodeintellicode",
-    "streetsidesoftware.code-spell-checker",
-    "yzhang.markdown-all-in-one"
+    "redhat.vscode-yaml"
   ],
-  
-  // VS Code settings customization
   "settings": {
-    // Python settings
-    "python.pythonPath": "/usr/local/bin/python",
     "python.formatting.provider": "black",
-    "python.linting.enabled": true,
-    "python.linting.pylintEnabled": true,
-    "python.testing.pytestEnabled": true,
-    "python.analysis.typeCheckingMode": "basic",
-    
-    // JavaScript settings
     "eslint.format.enable": true,
-    "javascript.updateImportsOnFileMove.enabled": "always",
-    "typescript.updateImportsOnFileMove.enabled": "always",
-    
-    // Editor settings
-    "editor.formatOnSave": true,
-    "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": true,
-      "source.organizeImports": true
-    },
-    "editor.rulers": [80, 100],
-    "files.trimTrailingWhitespace": true,
-    
-    // Terminal settings
-    "terminal.integrated.defaultProfile.linux": "bash",
-    
-    // Git settings
-    "git.enableSmartCommit": true,
-    "git.autofetch": true
+    "editor.formatOnSave": true
   },
-  
-  // Post-creation commands
   "postCreateCommand": "sh .devcontainer/post-create.sh",
-  
-  // Ports to forward
-  "forwardPorts": [
-    5000,  // Flask backend
-    3000,  // React/Node frontend
-    5432,  // PostgreSQL
-    9229   // Node debugger
-  ],
-  
-  // Environment variables
+  "forwardPorts": [5000, 3000, 5432],
   "remoteEnv": {
-    "FLASK_ENV": "development",
-    "FLASK_APP": "app.py",
-    "DATABASE_URL": "postgresql://postgres:password@db:5432/palace_of_quests",
-    "NODE_ENV": "development",
-    "PYTHONPATH": "${workspaceFolder}",
-    "PYTHONDONTWRITEBYTECODE": "1"
+    "DATABASE_URL": "${localEnv:DATABASE_URL}"
   },
-  
-  // Mount SSH keys and other local resources
-  "mounts": [
-    "source=${localEnv:HOME}/.ssh,target=/root/.ssh,type=bind,consistency=cached",
-    "source=${localEnv:HOME}/.gitconfig,target=/root/.gitconfig,type=bind,consistency=cached"
-  ],
-  
-  // Services to run
-  "runServices": [
-    "app",
-    "db",
-    "redis"  // Added for caching if needed
-  ],
-  
-  // Shutdown action
-  "shutdownAction": "stopCompose",
-  
-  // Features to install
   "features": {
-    "ghcr.io/wxw-matt/devcontainer-features/command_runner:0": {},
-    "ghcr.io/devcontainers/features/node:1": {
-      "version": "18"
-    },
-    "ghcr.io/devcontainers/features/python:1": {
-      "version": "3.11"
-    },
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+    "ghcr.io/devcontainers/features/node:1": { "version": "18" },
+    "ghcr.io/devcontainers/features/python:1": { "version": "3.11" }
   }
 }
