@@ -1,5 +1,13 @@
+# app/config.py
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
 class Config:
-    SQLALCHEMY_DATABASE_URI = 'postgresql://username:password@localhost:5432/palace_of_quests'
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SECRET_KEY = 'your-secret-key'
-    JWT_SECRET_KEY = 'your-jwt-secret-key'
+    PI_API_KEY = os.getenv("PI_API_KEY")
+    PI_SECRET_SEED = os.getenv("PI_SECRET_SEED")
+    PI_ENV = os.getenv("PI_ENV", "TESTNET")  # or MAINNET
+
+# In your app factory:
+# app.config.from_object("app.config.Config")
