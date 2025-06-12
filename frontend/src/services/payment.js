@@ -1,6 +1,8 @@
-// src/services/paymentProcessing.js
+// src/services/payment.js
 
 const axios = require('axios');
+// payment.js
+document.getElementById("payBtn").addEventListener("click", initiateA2UPayment);
 
 // Configure Axios client
 const axiosClient = axios.create({
