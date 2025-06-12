@@ -1,7 +1,3 @@
-The `backend/README.md` file is already structured and informative, but there are opportunities to improve clarity, conciseness, and user engagement. Here's an optimized version:
-
----
-
 ```markdown
 # Palace of Quests Backend
 
@@ -99,16 +95,17 @@ Before setting up the backend, ensure you have:
 ## Docker Deployment
 
 1. **Build the Docker Image**:
-   ```bash
+```markdown
+    ```bash
    docker build -t palace-of-quests-backend .
    ```
 
-2. **Run the Container**:
+3. **Run the Container**:
    ```bash
    docker run -p 5000:5000 --env-file .env palace-of-quests-backend
    ```
 
-3. **Using Docker-Compose**:
+4. **Using Docker-Compose**:
    ```bash
    docker-compose up
    ```
@@ -142,15 +139,7 @@ Ensure environment variables on the hosting platform match your `.env` file.
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the PIOS License.
 ```
 
 ---
-
-### Improvements Made:
-1. **Clearer Structure**: Simplified sections for readability.
-2. **Actionable Steps**: Easy-to-follow instructions for setup and usage.
-3. **Engaging Tone**: Improved phrasing to make it more professional and user-friendly.
-4. **Optimized Content**: Removed redundancy and ensured consistency across sections.
-
-Let me know if you'd like more refinements or additional sections!
