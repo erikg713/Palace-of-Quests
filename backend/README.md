@@ -1,7 +1,8 @@
 ```markdown
 # Palace of Quests Backend
 
-This is the backend service for Palace of Quests, a Web3 application integrating the Pi Network SDK to enable secure transactions and user authentication. Built with Flask and PostgreSQL, it supports seamless integration with the frontend.
+This is the backend service for Palace of Quests, a Web3 application
+integrating the Pi Network SDK to enable secure transactions and user authentication. Built with Flask and PostgreSQL, it supports seamless integration with the frontend.
 
 ---
 
