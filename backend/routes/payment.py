@@ -31,3 +31,56 @@ def complete_payment():
         return jsonify({"error": "Payment not completed"}), 400
 
     return jsonify({"message": "Payment confirmed"}), 200
+
+# routes/payments.py
+from flask import Blueprint, request, jsonify
+import requests
+import os
+from database import db
+from models.pi_payment import PiNetworkPayment
+
+payments_bp = Blueprint('payments', __name__)
+
+PI_API_KEY = os.getenv("PI_API_KEY")
+PI_WALLET_SEED = os.getenv("PI_WALLET_SEED")
+APP_WALLET_ADDRESS = os.getenv("PI_APP_WALLET")  # Your receiving wallet
+
+@payments_bp.route('/pi/create-payment', methods=['POST'])
+def create_pi_payment():
+    data = request.json
+    amount = data.get('amount')
+    pi_username = data.get('pi_username')
+    plan = data.get('plan')
+
+    # Create payment request
+    payment_payload = {
+        "amount": amount,
+        "memo": f"Subscription for {plan}",
+        "metadata": {"user": pi_username, "plan": plan},
+        "to_address": APP_WALLET_ADDRESS
+    }
+
+    headers = {
+        "Authorization": f"Key {PI_API_KEY}",
+        "Content-Type": "application/json"
+    }
+
+    response = requests.post("https://api.minepi.com/v2/payments", json=payment_payload, headers=headers)
+    
+    if response.status_code == 201:
+        payment_data = response.json()
+        payment_id = payment_data['identifier']
+
+        new_payment = PiNetworkPayment(
+            payment_id=payment_id,
+            pi_username=pi_username,
+            amount=amount,
+            subscription_plan=plan,
+            status='pending'
+        )
+        db.session.add(new_payment)
+        db.session.commit()
+
+        return jsonify({"payment_id": payment_id, "status": "pending"})
+    else:
+        return jsonify({"error": "Failed to create Pi payment"}), 400
