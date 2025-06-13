@@ -5,7 +5,16 @@ export FLASK_APP=app
 flask db init
 flask db migrate -m "Initial migration for Palace of Quests schema"
 flask db upgrade
+from flask import Flask
+from your_blueprint_file import payments_bp
 
+app = Flask(__name__)
+
+# Register blueprint
+app.register_blueprint(payments_bp)
+
+if __name__ == "__main__":
+    app.run(debug=True)
 app = Flask(__name__)
 
 @app.route("/api/pi/create-payment", methods=["POST"])
