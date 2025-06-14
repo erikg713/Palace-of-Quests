@@ -1,0 +1,52 @@
+name: Snyk Security
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  snyk:
+    concurrency: snyk-${{ github.ref }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Snyk CLI
+        uses: snyk/actions/setup@v3
+        with:
+          token: ${{ secrets.SNYK_TOKEN }}
+
+      - name: Snyk Code Security Analysis (SARIF output)
+        run: snyk code test --severity-threshold=high --sarif-file-output=snyk-code.sarif
+
+      - name: Snyk Open Source Dependency Monitoring
+        run: snyk monitor --all-projects --org="${{ secrets.SNYK_ORG_ID }}" --tags=team:web,priority:high
+
+      - name: Snyk Infrastructure as Code Test
+        run: snyk iac test --severity-threshold=medium
+
+      - name: Build and Monitor Docker Image (Snyk Container)
+        env:
+          DOCKER_BUILDKIT: 1
+        run: |
+          docker build --build-arg BUILDKIT_INLINE_CACHE=1 -t ${{ github.repository }}:latest .
+          snyk container monitor ${{ github.repository }}:latest --file=Dockerfile
+
+      - name: Upload Snyk SARIF results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: snyk-code.sarif
+
+      - name: Cleanup SARIF file
+        run: rm -f snyk-code.sarif
