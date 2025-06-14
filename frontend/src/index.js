@@ -7,14 +7,25 @@ import './styles/global.css';
 
 const App = React.lazy(() => import('./App'));
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+// Ensure the root element exists before continuing
+const rootElement = document.getElementById('root');
+if (!rootElement) {
+  throw new Error('Root element not found. Please ensure there is a <div id="root"></div> in your index.html.');
+}
 
+const root = ReactDOM.createRoot(rootElement);
+
+// Main render tree with providers and error boundaries for robust UX
 root.render(
   <React.StrictMode>
     <ErrorBoundary>
       <UserProvider>
         <NotificationProvider>
-          <Suspense fallback={<div>Loading application...</div>}>
+          <Suspense fallback={
+            <div role="status" aria-live="polite" style={{ textAlign: 'center', marginTop: '2rem' }}>
+              Loading application...
+            </div>
+          }>
             <App />
           </Suspense>
         </NotificationProvider>
