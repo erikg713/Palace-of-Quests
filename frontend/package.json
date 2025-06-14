@@ -32,7 +32,7 @@
     "check-updates": "npx npm-check-updates"
   },
   "dependencies": {
-    "axios": "~1.7.7",
+    "axios": "~1.9.0",
     "react": "~19.1.0",
     "react-dom": "~19.1.0",
     "react-router-dom": "~7.1.5"
