@@ -13,10 +13,14 @@
   ],
   "settings": {
     "python.formatting.provider": "black",
+    "python.linting.enabled": true,
+    "python.linting.flake8Enabled": true,
     "eslint.format.enable": true,
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "yaml.format.enable": true
   },
-  "postCreateCommand": "sh .devcontainer/post-create.sh",
+  "postCreateCommand": "bash .devcontainer/post-create.sh",
   "forwardPorts": [5000, 3000, 5432],
   "remoteEnv": {
     "DATABASE_URL": "${localEnv:DATABASE_URL}"
