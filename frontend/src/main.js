@@ -1,4 +1,4 @@
-// Palace of Quests - Pi Network Metaverse Game Entry
+// Palace of Quests – Pi Network Metaverse Game Entry
 // Handles Pi Network authentication, scene initialization, and error management
 
 import { initScene, startGameLoop } from './scene';
@@ -30,16 +30,23 @@ async function authenticateWithPi() {
 }
 
 // --- 3D Metaverse Scene Setup ---
-try {
-  initScene();
-  requestAnimationFrame(startGameLoop);
-} catch (err) {
-  showError('Failed to initialize the 3D environment.');
-  console.error('[3D Scene Init Error]', err);
-}
+(function initializeMetaverse() {
+  try {
+    initScene();
+    requestAnimationFrame(startGameLoop);
+  } catch (err) {
+    showError('Failed to initialize the 3D environment.');
+    console.error('[3D Scene Init Error]', err);
+  }
+})();
 
 // --- UI Event Bindings ---
-document.getElementById('piConnectBtn')?.addEventListener('click', authenticateWithPi);
+(function bindUIEvents() {
+  const piConnectBtn = document.getElementById('piConnectBtn');
+  if (piConnectBtn) {
+    piConnectBtn.addEventListener('click', authenticateWithPi);
+  }
+})();
 
 // --- Global Error Handling ---
 window.addEventListener('error', (event) => {
