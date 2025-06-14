@@ -1,7 +1,7 @@
 {
   "name": "palace-of-quests-frontend",
   "version": "1.0.1",
-  "description": "Frontend for Palace of Quests. Modern React app optimized for Pi Browser and cross-browser compatibility.",
+  "description": "Frontend for Palace of Quests. Modern React app optimized for Pi Browser compatibility.",
   "author": "erikg713",
   "license": "MIT",
   "repository": {
