@@ -1,37 +1,57 @@
 {
   "name": "palace-of-quests-frontend",
   "version": "1.0.1",
-  "description": "Frontend for Palace of Quests. Optimized for Pi Browser compatibility.",
+  "description": "Frontend for Palace of Quests. Modern React app optimized for Pi Browser and cross-browser compatibility.",
   "author": "erikg713",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/erikg713/Palace-of-Quests.git"
   },
+  "homepage": "https://github.com/erikg713/Palace-of-Quests#readme",
+  "bugs": {
+    "url": "https://github.com/erikg713/Palace-of-Quests/issues"
+  },
+  "keywords": [
+    "palace-of-quests",
+    "react",
+    "frontend",
+    "pi-browser",
+    "game"
+  ],
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "lint": "eslint 'src/**/*.{js,jsx}'",
-    "format": "prettier --write 'src/**/*.{js,jsx,css,md}'"
+    "format": "prettier --write 'src/**/*.{js,jsx,css,md}'",
+    "prepare": "husky install",
+    "clean": "rm -rf build",
+    "analyze": "source-map-explorer build/static/js/*.js",
+    "check-updates": "npx npm-check-updates"
   },
   "dependencies": {
-    "axios": "^1.7.7",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "react-router-dom": "^7.1.5"
+    "axios": "~1.7.7",
+    "react": "~19.1.0",
+    "react-dom": "~19.1.0",
+    "react-router-dom": "~7.1.5"
   },
   "devDependencies": {
-    "eslint": "^8.56.0",
-    "prettier": "^3.2.5",
-    "react-scripts": "^5.0.1"
+    "eslint": "~8.56.0",
+    "prettier": "~3.2.5",
+    "react-scripts": "~5.0.1",
+    "husky": "~8.0.0",
+    "source-map-explorer": "~2.5.4",
+    "npm-check-updates": "~16.14.13"
   },
   "browserslist": [
-    "last 2 Chrome versions",
-    "last 2 Edge versions",
-    "last 2 Android versions",
-    "ChromeAndroid >= 80",
-    "not dead"
+    ">0.2%",
+    "not dead",
+    "not op_mini all",
+    "Chrome >= 80",
+    "Firefox >= 78",
+    "Safari >= 14",
+    "Edge >= 90"
   ]
 }
