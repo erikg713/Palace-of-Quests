@@ -2,15 +2,44 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A web app for rewarding quest payments.">
+  <meta name="keywords" content="Quest, Reward, Payment, Pi SDK">
+  <link rel="icon" href="path-to-your-favicon.ico">
+  <link rel="stylesheet" href="./styles.css">
   <title>Quest Reward Payment</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f4f4f4;
+    }
+    #payBtn {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      background-color: #007BFF;
+      color: white;
+    }
+    #payBtn:hover {
+      background-color: #0056b3;
+    }
+  </style>
 </head>
 <body>
-  <button id="payBtn">Pay Reward</button>
+  <button id="payBtn" aria-label="Pay Reward Button">Pay Reward</button>
 
-  <!-- Pi SDK (if needed) -->
-  <script src="https://sdk.minepi.com/pi-sdk.js"></script>
-
+  <!-- Pi SDK -->
+  <script src="https://sdk.minepi.com/pi-sdk.js" defer></script>
+  
   <!-- Main JS -->
-  <script type="module" src="./main.js"></script>
+  <script type="module" src="./main.js" defer></script>
 </body>
 </html>
