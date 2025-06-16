@@ -147,3 +147,135 @@ Or connect on [GitHub](https://github.com/erikg713/Palace-of-Quests).
 Ready to forge your destiny? Join Palace of Quests and help shape the next era of metaverse gaming!
 
 ---
+
+
+---
+
+🏗️ PALACE OF QUESTS — GAME & WORLD DESIGN
+
+🌍 1. WORLD STRUCTURE
+
+The game is set inside and around the Palace, which expands over time. It's broken down into zones, each with quests, economies, and player opportunities.
+
+🔲 Core Zones
+
+Zone	Purpose
+
+🏰 The Palace Core	Central hub: player spawn, quest board, NFT market, governance hall
+🌲 Mysticwood Forest	PvE zone: monster hunting, herbal NFT crafting
+🏜️ Shatterdunes	PvP arena, rogue quests, NFT staking duels
+🧙‍♂️ Rune Archives	Lore library, skill upgrade, DAO voting area
+🏞️ The Skyreach Isles	Floating NFT lands players can own/build on
+🌀 The Nexus Gate	Teleportation to new realms/seasonal events
+
+
+
+---
+
+🎨 2. VISUAL DESIGN GUIDE
+
+Style:
+
+Hybrid Fantasy Futurism
+Ancient rune + magic + digital architecture
+
+Vibrant & Luminous
+Neon auras, magical lighting, glowing portals
+
+3D Engine Friendly
+Modular builds using Unity/Unreal assets
+
+
+Color Palette:
+
+Primary: Sapphire blue, deep violet, emerald green
+
+Accents: Gold, white light, neon cyan
+
+Ambient: Fog, auroras, floating particles
+
+
+
+---
+
+🖥️ 3. UI/UX WIREFRAMES
+
+Main Screens:
+
+1. Home Lobby
+
+Profile avatar (NFT skin)
+
+Quest board (Daily, Weekly, Storyline)
+
+Inventory (NFTs, items, pets)
+
+$PI Wallet sync & balance
+
+Guild tab + chat
+
+
+
+2. Quest Detail View
+
+Description, difficulty, rewards
+
+Accept / Decline / Team-up
+
+Map pin & fast travel
+
+
+
+3. NFT Marketplace
+
+Grid & card view
+
+Filter: gear, land, title, pet
+
+Buy with $PI or barter
+
+
+
+4. Land Builder UI
+
+Drag & drop structures (like Roblox Studio)
+
+Asset vault (NFT-based)
+
+Publish as public/private zone
+
+
+
+
+
+---
+
+🧩 4. INTERACTION DESIGN
+
+Feature	Description
+
+🧭 Movement	WASD (PC) or joystick (mobile) + teleport dash
+💬 Chat & Voice	Global, zone, guild, party
+🪙 $PI Integration	Wallet sign-in + smart contract hooks
+🎭 Skins	All player visuals are NFT-based
+📖 Lore Discovery	Scanning runes to unlock journal entries
+🛠️ Crafting	Merge NFTs + use $PI to create rarer items
+
+
+
+---
+
+🧱 5. BUILD WITH TOOLS
+
+Functionality	Recommended Tools
+
+Game Engine	Unity (WebGL + Mobile), Unreal for full 3D
+Backend	Firebase + Node.js or Supabase
+Smart Contracts	Pi Blockchain SDK (once open) + Solidity backup
+NFT Hosting	IPFS + Pinata + Moralis
+Wallet Connect	Pi Wallet SDK + Web3Modal
+DAO Voting	Snapshot.org-style UI (custom for Pi)
+
+
+
+---
