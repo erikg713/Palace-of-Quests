@@ -88,7 +88,8 @@ palace-of-quests/
 
 ### Installation
 
-```bash
+```
+
 # Clone the repository
 git clone https://github.com/erikg713/Palace-of-Quests.git
 cd Palace-of-Quests
@@ -108,6 +109,9 @@ psql -U <your_user> -d piquest_db -f ../database/roles.sql
 # Frontend setup
 cd ../frontend
 npm install
+
+---
+
 ```
 
 *For more advanced setup and Docker deployment, see [backend/README.md](backend/README.md) and [database/README.md](database/README.md).*
@@ -122,6 +126,7 @@ flask run
 
 # Start frontend (from frontend/)
 npm start
+
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser to play.
@@ -144,11 +149,16 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to play.
 We welcome contributions from developers, artists, and enthusiasts!
 
 1. Fork this repository and create a new branch:
-   ```bash
+
+```
    git checkout -b feature/your-feature
-   ```
+   
+---
+
 2. Make your changes and commit them with clear, descriptive messages.
+
 3. Push your branch and open a Pull Request.
+
 4. Please read our [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
 ---
@@ -162,7 +172,7 @@ This project is licensed under the PIOS License. See [LICENSE](LICENSE) for full
 ## Contact
 
 For questions, suggestions, or feedback, reach out at:  
-📧 **piquests@gmail.com**
+📧 **palaceofquests@protonmail.com**
 
 Or connect on [GitHub](https://github.com/erikg713/Palace-of-Quests).
 
@@ -433,28 +443,4 @@ DAO Voting	Snapshot.org-style UI (custom for Pi)
 
 ---
 
-🔜 Next Step Options
-
-What would you like to build next?
-
-1. UI Mockups – I can design clean visuals for menus, HUD, etc.
-
-
-2. NFT Collection Design – Weapons, skins, pets, land assets
-
-
-3. Game Loop Diagram – Visual map of how players progress
-
-
-4. Landing Page Draft – For your website or teaser site
-
-
-5. Pitch Deck Slides – For investors, grants, or launch partners
-
-
-
-Just tell me:
-“Let’s build the [your choice]” and we’ll do it.
-
-Let’s turn this palace into a product. 👑
 
