@@ -76,7 +76,7 @@ palace-of-quests/
 │   │   ├── Marketplace.jsx
 │   │   └── Quests.jsx
 │   ├── context/
-│   │   └── PiWalletContext.jsx   # Handles wallet auth
+│   │   └── PiWalletContext.jsx  # Pi wallet auth
 │   ├── App.jsx
 │   └── main.jsx
 ├── styles/
