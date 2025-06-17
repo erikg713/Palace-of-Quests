@@ -62,6 +62,30 @@ Add real screenshots or GIFs to showcase your game. Example:
 - PostgreSQL 13+
 - Docker (optional but recommended for deployment)
 
+### FILE STRUCTURE ###
+```
+palace-of-quests/
+├── public/
+│   └── index.html
+├── src/
+│   ├── assets/             # Logos, icons, backgrounds
+│   ├── components/         # Reusable UI: InventoryCard, QuestCard
+│   ├── pages/
+│   │   ├── Home.jsx        # Landing page
+│   │   ├── Inventory.jsx
+│   │   ├── Marketplace.jsx
+│   │   └── Quests.jsx
+│   ├── context/
+│   │   └── PiWalletContext.jsx   # Handles wallet auth
+│   ├── App.jsx
+│   └── main.jsx
+├── styles/
+│   └── main.css
+├── .env
+├── package.json
+└── README.md
+---
+
 ### Installation
 
 ```bash
