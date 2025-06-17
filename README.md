@@ -1,6 +1,4 @@
-'''
-
- # Palace of Quests 🏰
+### Palace of Quests 🏰 ###
 
 **Palace of Quests** is an immersive, Web3-powered metaverse adventure built on the Pi Network. Explore a dynamic world, complete quests, level up, and earn real rewards—powered by blockchain technology and a vibrant community.
 
