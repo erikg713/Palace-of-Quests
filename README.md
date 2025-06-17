@@ -84,31 +84,39 @@ palace-of-quests/
 ├── .env
 ├── package.json
 └── README.md
+
 ---
-
-### Installation
-
-```
 
 # Clone the repository
 git clone https://github.com/erikg713/Palace-of-Quests.git
+```
 cd Palace-of-Quests
 
-# Backend setup
+---
+
+### Backend Setup ###
+
+```
 cd backend
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 cp .env.example .env  # Edit with your credentials and secrets
 
+---
+
 # Database setup (see database/README.md for full details)
+'''
 createdb piquest_db
 psql -U <your_user> -d piquest_db -f ../database/schema.sql
 psql -U <your_user> -d piquest_db -f ../database/roles.sql
+---
 
-# Frontend setup
-cd ../frontend
-npm install
+### Frontend Setup ###
+```
+cd palaceofquests/frontend
+```
+npm install 
 
 ---
 
@@ -120,12 +128,14 @@ npm install
 
 ## Usage
 
-```bash
+```
 # Start backend (from backend/)
 flask run
 
 # Start frontend (from frontend/)
 npm start
+
+---
 
 ```
 
@@ -144,7 +154,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to play.
 
 ---
 
-## Contributing
+### Contributing ###
 
 We welcome contributions from developers, artists, and enthusiasts!
 
@@ -152,7 +162,6 @@ We welcome contributions from developers, artists, and enthusiasts!
 
 ```
    git checkout -b feature/your-feature
-   
 ---
 
 2. Make your changes and commit them with clear, descriptive messages.
@@ -163,7 +172,7 @@ We welcome contributions from developers, artists, and enthusiasts!
 
 ---
 
-## License
+### License ###
 
 This project is licensed under the PIOS License. See [LICENSE](LICENSE) for full details.
 
@@ -178,7 +187,7 @@ Or connect on [GitHub](https://github.com/erikg713/Palace-of-Quests).
 
 ---
 
-Ready to forge your destiny? Join Palace of Quests and help shape the next era of metaverse gaming!
+Ready to forge your destiny? Join Palace of Quests and help shape the next era of metaverse Web3 Pi Network gaming!
 
 ---
 
