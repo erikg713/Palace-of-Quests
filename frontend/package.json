@@ -3,7 +3,7 @@
   "version": "1.0.1",
   "description": "Frontend for Palace of Quests. Modern React app optimized for Pi Browser compatibility.",
   "author": "erikg713",
-  "license": "MIT",
+  "license": "PIOS",
   "repository": {
     "type": "git",
     "url": "https://github.com/erikg713/Palace-of-Quests.git"
@@ -17,14 +17,14 @@
     "react",
     "frontend",
     "pi-browser",
-    "game"
+    "web3-game"
   ],
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "react-scripts test start",
     "eject": "react-scripts eject",
-    "lint": "eslint 'src/**/*.{js,jsx}'",
+    "lint": "eslint start",
     "format": "prettier --write 'src/**/*.{js,jsx,css,md}'",
     "prepare": "husky install",
     "clean": "rm -rf build",
@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "axios": "~1.8.3",
+    "axios": "~1.9.0"
     "react": "~19.1.0",
     "react-dom": "~19.1.0",
     "react-router-dom": "~7.5.2"
