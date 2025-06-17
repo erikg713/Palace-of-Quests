@@ -35,15 +35,15 @@
     "axios": "~1.9.0",
     "react": "~19.1.0",
     "react-dom": "~19.1.0",
-    "react-router-dom": "~7.1.5"
+    "react-router-dom": "~7.5.2"
   },
   "devDependencies": {
-    "eslint": "~8.56.0",
+    "eslint": "~9.0.0",
     "prettier": "~3.2.5",
     "react-scripts": "~5.0.1",
     "husky": "~8.0.0",
     "source-map-explorer": "~2.5.4",
-    "npm-check-updates": "~16.14.13"
+    "npm-check-updates": "~17.0.0"
   },
   "browserslist": [
     ">0.2%",
