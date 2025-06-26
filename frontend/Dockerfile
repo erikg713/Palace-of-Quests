@@ -13,7 +13,7 @@ COPY . .
 RUN npm run build
 
 # Stage 2: Serve the React application
-FROM nginx:alpine
+FROM nginx:1.28.0-alpine3.21-slim
 
 # Copy the built React application from the previous stage
 COPY --from=build /app/build /usr/share/nginx/html
