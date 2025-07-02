@@ -1,64 +1,66 @@
 from flask import Blueprint, request, jsonify
 from db.supabase_client import supabase
+import requests
+import os
 
-pi_bp = Blueprint('pi', __name__)
+pi_bp = Blueprint("pi", __name__)
 
-# Simulated Pi Network SDK functions -- replace with real SDK calls
-def pi_sdk_create_payment(amount, memo, metadata, uid):
-    # TODO: Replace with real Pi SDK integration
-    return {"payment_id": f"pi_{uid}_{amount}", "status": "created"}
+# ENV variables for Pi Network API
+PI_API_URL = "https://api.minepi.com/v2/"  # Use production URL as needed
+PI_API_KEY = os.environ.get("PI_API_KEY")  # Set this in your env
 
-def pi_sdk_submit_payment(payment_id):
-    # TODO: Replace with real Pi SDK call
-    return {"txid": f"tx_{payment_id}", "status": "submitted"}
-
-def pi_sdk_complete_payment(payment_id, txid):
-    # TODO: Replace with real Pi SDK call
-    return {"payment_id": payment_id, "txid": txid, "status": "completed"}
+def verify_pi_payment(payment_id, txid):
+    """Verifies the payment with Pi Network's backend (mocked here)."""
+    # In production, use Pi Network's backend API and verify with your server secret
+    headers = {"Authorization": f"Key {PI_API_KEY}"}
+    response = requests.get(f"{PI_API_URL}payments/{payment_id}", headers=headers)
+    if response.status_code != 200:
+        return False
+    data = response.json()
+    # Validate txid matches, status is completed, etc.
+    return data.get("txid") == txid and data.get("status") == "completed"
 
 @pi_bp.route("/create-payment", methods=["POST"])
 def create_payment():
     data = request.get_json()
-    required = {"amount", "memo", "metadata", "uid"}
+    required = {"payment_id", "uid", "amount", "memo", "metadata"}
     if not data or not required.issubset(data):
         return jsonify({"error": "Missing required fields"}), 400
 
-    # Pi SDK: Create payment
-    pi_response = pi_sdk_create_payment(
-        data["amount"], data["memo"], data["metadata"], data["uid"]
-    )
-    payment_id = pi_response["payment_id"]
-
-    # Supabase: Store payment
-    sb_result = supabase.table("payments").insert({
-        "payment_id": payment_id,
+    # Store the payment initiation in Supabase
+    result = supabase.table("payments").insert({
+        "payment_id": data["payment_id"],
         "uid": data["uid"],
         "amount": data["amount"],
         "memo": data["memo"],
         "metadata": data["metadata"],
         "status": "created"
     }).execute()
-    if sb_result.error:
+    if result.error:
         return jsonify({"error": "Database error"}), 500
-    return jsonify({"payment_id": payment_id}), 201
+
+    return jsonify({"payment_id": data["payment_id"]}), 201
 
 @pi_bp.route("/submit-payment", methods=["POST"])
 def submit_payment():
     data = request.get_json()
     payment_id = data.get("payment_id")
-    if not payment_id:
-        return jsonify({"error": "payment_id required"}), 400
+    txid = data.get("txid")
+    if not payment_id or not txid:
+        return jsonify({"error": "payment_id and txid required"}), 400
 
-    pi_response = pi_sdk_submit_payment(payment_id)
-    txid = pi_response["txid"]
+    # Verify payment with Pi Network
+    if not verify_pi_payment(payment_id, txid):
+        return jsonify({"error": "Payment verification failed"}), 400
 
-    # Supabase: Update payment with txid and status
-    sb_result = supabase.table("payments").update({
+    # Update payment status in Supabase
+    result = supabase.table("payments").update({
         "txid": txid,
         "status": "submitted"
     }).eq("payment_id", payment_id).execute()
-    if sb_result.error:
+    if result.error:
         return jsonify({"error": "Database error"}), 500
+
     return jsonify({"txid": txid}), 200
 
 @pi_bp.route("/complete-payment", methods=["POST"])
@@ -69,19 +71,22 @@ def complete_payment():
     if not payment_id or not txid:
         return jsonify({"error": "payment_id and txid required"}), 400
 
-    pi_response = pi_sdk_complete_payment(payment_id, txid)
+    # Final verification (optional, depending on your flow)
+    if not verify_pi_payment(payment_id, txid):
+        return jsonify({"error": "Payment verification failed"}), 400
 
-    # Supabase: Mark payment as completed
-    sb_result = supabase.table("payments").update({
+    # Mark payment as completed in Supabase
+    result = supabase.table("payments").update({
         "status": "completed"
     }).eq("payment_id", payment_id).execute()
-    if sb_result.error:
+    if result.error:
         return jsonify({"error": "Database error"}), 500
-    return jsonify({"payment": pi_response}), 200
+
+    return jsonify({"payment_id": payment_id, "status": "completed"}), 200
 
 @pi_bp.route("/get-payment/<payment_id>", methods=["GET"])
 def get_payment(payment_id):
-    sb_result = supabase.table("payments").select("*").eq("payment_id", payment_id).single().execute()
-    if sb_result.error or not sb_result.data:
+    result = supabase.table("payments").select("*").eq("payment_id", payment_id).single().execute()
+    if result.error or not result.data:
         return jsonify({"error": "Payment not found"}), 404
-    return jsonify(sb_result.data), 200
+    return jsonify(result.data), 200
