@@ -12,7 +12,32 @@ from routes.pi import pi_bp  # Example: adjust path as needed
 from db.supabase_client import supabase  # Example import
 # Import your blueprints here
 from your_blueprint_file import payments_bp  # Adjust the import as needed
+from flask import Flask, jsonify
+from flask_cors import CORS
+from config import Config
+from routes.pi import pi_bp
 
+def create_app():
+    app = Flask(__name__)
+    app.config.from_object(Config)
+    CORS(app)
+
+    # Register blueprints
+    app.register_blueprint(pi_bp, url_prefix="/api/pi")
+
+    @app.route("/")
+    def root():
+        return jsonify({"msg": "Palace of Quests API"})
+
+    @app.route("/health")
+    def health():
+        return jsonify({"status": "ok"})
+
+    return app
+
+if __name__ == "__main__":
+    app = create_app()
+    app.run(debug=True, host="0.0.0.0", port=4000)
 def create_app():
     app = Flask(__name__)
 
