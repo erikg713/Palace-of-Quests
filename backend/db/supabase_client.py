@@ -1,7 +1,12 @@
 import os
-from supabase import create_client, Client  # Use the official supabase-py SDK
+from supabase import create_client, Client
+from config import Config
 
-SUPABASE_URL = os.getenv("SUPABASE_URL")
-SUPABASE_KEY = os.getenv("SUPABASE_KEY")
+def get_supabase() -> Client:
+    url = Config.SUPABASE_URL
+    key = Config.SUPABASE_KEY
+    if not url or not key:
+        raise RuntimeError("Supabase credentials are not set in environment.")
+    return create_client(url, key)
 
-supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
+supabase = get_supabase()
