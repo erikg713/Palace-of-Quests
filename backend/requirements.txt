@@ -3,6 +3,7 @@ Flask-JWT-Extended==4.7.1
 psycopg2==2.9.10
 python-dotenv==1.1.0
 Flask-SQLAlchemy==3.1.1
-git+https://github.com/pi-apps/pi-platform-python.git
 gunicorn==23.0.0
 cryptography==45.0.4
+flask-cors
+supabase
