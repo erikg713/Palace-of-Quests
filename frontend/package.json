@@ -39,7 +39,7 @@
     "react-router-dom": "~7.5.2"
   },
   "devDependencies": {
-    "eslint": "~9.0.0",
+    "eslint": "~9.27.0",
     "prettier": "~3.2.5",
     "react-scripts": "~5.0.1",
     "husky": "~9.1.7",
